@@ -5,11 +5,13 @@
 ## Author :
 ##    Erin      Bernardoni
 ##    Antoine   Orion
+##	  Valentine INGARDIN
+##    Maroua 	MELKI
 ## File description :
-##    Compile and execute the GameOfLife projet
+##    Compile and execute GeomPaint project
 ##
 
-NAME		:= GameOfLife
+NAME		:= GeomPain
 JC 			:= javac
 EXEC		:= java
 FILE_TYPE	:= java
@@ -23,9 +25,9 @@ OBJ_DIR		:= obj
 SRC			:=$(wildcard $(SRC_DIR)/*.$(FILE_TYPE))
 OBJ			:= $(SRC:$(SRC_DIR)/%.$(FILE_TYPE)=$(OBJ_DIR)/%.$(OBJ_TYPE))
 
-# PICOLIB		:= picocli-4.6.1.jar
 LFLAGS		:= $(LIB_DIR)/$(PICOLIB)
-CFLAGS		:= -Xlint:deprecation -cp $(SRC_DIR)
+CFLAGS		:= -cp $(SRC_DIR)
+# CFLAGS		:= -Xlint:deprecation -cp $(SRC_DIR)
 EXEFLAGS	:= -cp $(OBJ_DIR)
 
 all		: compile
@@ -44,18 +46,6 @@ fclean	: clean
 	rmdir $(OBJ_DIR)
 
 re		: fclean all
-
-# lib:
-# ifeq (, $(wildcard ./$(LIB_DIR)/$(PICOLIB)))
-# 	$(MAKE) -C $(LIB_DIR)
-# endif
-
-# lib_clean:
-# 	$(MAKE) -s -C $(LIB_DIR)/ clean
-
-# lib_fclean:
-# 	$(MAKE) -s -C $(LIB_DIR)/ fclean
-
 
 .PHONY	: all compile clean fclean re lib
 
