@@ -1,18 +1,29 @@
+import Controllers.CanvasController;
+import Models.Mediator;
+import Views.CanvasView;
+
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        ShapeGeom shape = new ShapeGeom();
-        CanvaController cc = new CanvaController(shape);
-        CanvaView cv = new CanvaView(cc);
+        Mediator m = new Mediator();
 
-        shape.addObserver(cv);
+        // Link model to controller
+        CanvasController cc = new CanvasController(m);
+
+        // Link controller to view
+        CanvasView cv = new CanvasView(cc);
+
+        // Add view observer to the model
+        m.addObserver(cv);
 
         JFrame frame = new JFrame("Our super rectangle!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cv.setPreferredSize(new Dimension(500, 500));
-        frame.getContentPane().add(cv);
+        cv.setBackground(Color.white);
+        frame.setContentPane(cv);
 
         frame.pack();
         frame.setVisible(true);

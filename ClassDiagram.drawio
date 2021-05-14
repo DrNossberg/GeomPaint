@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="78961159f06e98e8-17" value="&lt;div&gt;&lt;i&gt;ShapeGeom&lt;/i&gt;&lt;/div&gt;&lt;div&gt;&lt;i&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;(abstract)&lt;/span&gt;&lt;br&gt;&lt;/i&gt;&lt;/div&gt;" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
+        <mxCell id="78961159f06e98e8-17" value="&lt;div&gt;&lt;i&gt;Models.ShapeGeom&lt;/i&gt;&lt;/div&gt;&lt;div&gt;&lt;i&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;(abstract)&lt;/span&gt;&lt;br&gt;&lt;/i&gt;&lt;/div&gt;" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
           <mxGeometry x="400" y="30" width="310" height="436" as="geometry" />
         </mxCell>
         <mxCell id="78961159f06e98e8-21" value="&lt;div&gt;+ private color : color&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="78961159f06e98e8-17" vertex="1">
@@ -64,7 +64,7 @@
         <mxCell id="0M7djDL0bi_taNWErHJm-2" value="+ draw(g):void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="_SBceAVWX3WUUOqYOyA2-11">
           <mxGeometry y="34" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="_SBceAVWX3WUUOqYOyA2-21" value="CanvaView" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
+        <mxCell id="_SBceAVWX3WUUOqYOyA2-21" value="Views.CanvasView" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
           <mxGeometry x="-320" y="80" width="160" height="227" as="geometry" />
         </mxCell>
         <mxCell id="_SBceAVWX3WUUOqYOyA2-22" value="+ field: type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="_SBceAVWX3WUUOqYOyA2-21" vertex="1">
@@ -118,7 +118,7 @@
         <mxCell id="4_bB-vSsy7LAxxvjSIpe-12" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="4_bB-vSsy7LAxxvjSIpe-5" vertex="1">
           <mxGeometry y="104" width="270" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4_bB-vSsy7LAxxvjSIpe-14" value="+ shapeSelect(MouseEvent e) : ShapeGeom" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4_bB-vSsy7LAxxvjSIpe-5" vertex="1">
+        <mxCell id="4_bB-vSsy7LAxxvjSIpe-14" value="+ shapeSelect(MouseEvent e) : Models.ShapeGeom" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4_bB-vSsy7LAxxvjSIpe-5" vertex="1">
           <mxGeometry y="112" width="270" height="26" as="geometry" />
         </mxCell>
         <mxCell id="4_bB-vSsy7LAxxvjSIpe-15" value="+ translate(int x, int y) : void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4_bB-vSsy7LAxxvjSIpe-5" vertex="1">
@@ -190,7 +190,7 @@
         <mxCell id="_2XkQiwsp4mKMtn9n1sC-12" value="MouseAdapter" style="html=1;" parent="1" vertex="1">
           <mxGeometry x="-395" y="490" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="_2XkQiwsp4mKMtn9n1sC-13" value="CanvaController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="_2XkQiwsp4mKMtn9n1sC-13" value="Controllers.CanvasController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="-420" y="600" width="160" height="86" as="geometry" />
         </mxCell>
         <mxCell id="_2XkQiwsp4mKMtn9n1sC-14" value="- Mediator" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="_2XkQiwsp4mKMtn9n1sC-13" vertex="1">
