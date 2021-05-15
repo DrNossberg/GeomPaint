@@ -1,5 +1,3 @@
-package Models;
-
 /*
 ** IUT Nancy-Charlemagne, 2021
 ** Projet :
@@ -13,30 +11,45 @@ package Models;
 **    Implementation of the Shape object
 */
 
+package Models;
+
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.awt.Polygon;
+import java.util.List;
 
-// implements Polygon
+
 @SuppressWarnings("deprecation")
-abstract class ShapeGeom extends Observable {
+public abstract class ShapeGeom extends Polygon {
+    protected Color borderColor = Color.black;
     protected Color color;
-    protected Color borderColor;
     protected int thickness;
-    protected Point center; // hum ?
     protected ArrayList<Point> pointMemo;
-    protected ArrayList<Boolean> showedMemo;
+    protected List<Boolean> showedMemo;
+    protected int maxMemoPoint;
 
-    void translate(int offset_x, int offest_y) {
+    public void translate(int offset_x, int offest_y) {
         for (Point memo : pointMemo)
             memo.translate(offset_x, offest_y);
     }
 
-    public abstract void colorChange(Color c);
-    public abstract void modifyShape();
+    public void setColor(Color c) {
+        this.color = c;
+    }
 
-    public ArrayList<Point> getpointMemo() {
+    public void setBorderColor(Color c) {
+        this.borderColor = c;
+    }
+
+
+    public abstract void modifyShape();
+    public void addMemoPoint(Point p) {
+        this.pointMemo.add(p);
+    }
+
+    public ArrayList<Point> getMemoPoint() {
         ArrayList<Point> tmp = new ArrayList<>();
 
         for (int i = 0; i < pointMemo.size(); i++)
@@ -44,6 +57,13 @@ abstract class ShapeGeom extends Observable {
                 tmp.add(pointMemo.get(i));
         return (tmp);
     }
+    
+    public void modifyMemoPoint(int pointIndex, Point nw_coord) {
+        if (this.pointMemo.size() < pointIndex)
+            return;
+        this.pointMemo.set(pointIndex, nw_coord);
+    }
+
     public abstract void draw(Graphics g);
 
 
