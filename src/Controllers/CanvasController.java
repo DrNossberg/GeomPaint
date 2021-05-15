@@ -20,6 +20,7 @@ public class CanvasController extends MouseAdapter {
 
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
+            System.out.println("left mouse?");
             points.add(new Point(e.getX(), e.getY()));
 
             if (this.points.size() == 2) {
@@ -27,10 +28,9 @@ public class CanvasController extends MouseAdapter {
                 this.points.clear();
             }
         }
-
     }
 
     public Mediator getMediator() {
-        return this.m;
+        return (this.m);
     }
 }

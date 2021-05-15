@@ -5,7 +5,7 @@ import Views.CanvasView;
 import javax.swing.JFrame;
 import java.awt.*;
 
-public class Main {
+public class GeomPain {
     public static void main(String[] args) {
         Mediator m = new Mediator();
 

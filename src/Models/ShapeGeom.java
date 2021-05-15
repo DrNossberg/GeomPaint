@@ -18,6 +18,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
+// implements Polygon
 @SuppressWarnings("deprecation")
 abstract class ShapeGeom extends Observable {
     protected Color color;
