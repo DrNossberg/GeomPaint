@@ -30,6 +30,12 @@ public abstract class ShapeGeom extends Polygon {
     protected List<Boolean> showedMemo;
     protected int maxMemoPoint;
 
+    ShapeGeom() {}
+
+    ShapeGeom(ArrayList<Point> points) {
+        this.pointMemo = points;
+    }
+
     public void translate(int offset_x, int offest_y) {
         for (Point memo : pointMemo)
             memo.translate(offset_x, offest_y);
