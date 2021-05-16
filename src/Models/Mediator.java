@@ -3,6 +3,7 @@ package Models;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 
@@ -27,6 +28,10 @@ public class Mediator extends Observable {
         notifyObservers();
     }
 
+    public ShapeGeom getSelectedShape() {
+        return (this.selectedShape);
+    }
+
     public void addShape() {
         this.addShape(this.selectedShape);
     }
@@ -38,15 +43,18 @@ public class Mediator extends Observable {
         notifyObservers();
     }
 
-    public void shapeSelect(MouseEvent e) {
-        this.selectedShape = null;
-        for (ShapeGeom shape : this.shapes)
-            if (shape.contains(e.getX(), e.getY())) {
-                System.out.println("contains ! ");
+    public boolean shapeIntersect(MouseEvent e) {
+        Rectangle click = new Rectangle(e.getX() - 1, e.getY() - 1, 30, 30);
+
+        for (ShapeGeom shape : this.shapes) {
+            if (shape.intersects(click)) {
                 this.selectedShape = shape;
-                break;
+                return (true);
             }
+        }
+        return (false);
     }
+
 
     public void translate(int offset_x, int offset_y) {
         this.selectedShape.translate(offset_x, offset_y);

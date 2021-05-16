@@ -55,7 +55,7 @@ public abstract class ShapeGeom extends Polygon {
         this.pointMemo.add(p);
     }
 
-    public ArrayList<Point> getMemoPoint() {
+    public ArrayList<Point> getSaisiePoint() {
         ArrayList<Point> tmp = new ArrayList<>();
 
         for (int i = 0; i < pointMemo.size(); i++)
@@ -71,6 +71,6 @@ public abstract class ShapeGeom extends Polygon {
     }
 
     public abstract void draw(Graphics g);
-
-
+    public abstract void dump();
+    public abstract boolean intersects(Rectangle r);
 }
