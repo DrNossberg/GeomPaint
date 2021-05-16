@@ -10,12 +10,21 @@ import java.lang.Math;
 public class Square extends ShapeGeom {
     protected final List<Boolean> showedMemo = Arrays.asList(true, false, true, false);
      // ArrayList<Boolean>  = new ArrayList<>(Arrays.asList());
-    public int maxMemoPoint;
+
+    public Square(ArrayList<Point> points) {
+        this(points.get(0), points.get(1));
+    }
 
     public Square(Point a, Point b) {
-        super.pointMemo = new ArrayList<>(); //(Point) a, (Point) b);
-        super.pointMemo.add(a);
-        super.pointMemo.add(b);
+        super.pointMemo = new ArrayList<>();
+        Point topLeft  = new Point( (int) Math.min(a.getX(), b.getX()),
+                                    (int) Math.min(a.getY(), b.getY()));
+        Point downRight = new Point((int) Math.max(a.getX(), b.getX()),
+                                    (int) Math.max(a.getY(), b.getY()));
+        System.out.println("TL : " + topLeft.getX() + ", " + topLeft.getY() +
+            "DR : " + downRight.getX() + ", " + downRight.getY());
+        super.pointMemo.add(topLeft);
+        super.pointMemo.add(downRight);
     }
 
     @Override
@@ -31,7 +40,7 @@ public class Square extends ShapeGeom {
 
         g.setColor(this.borderColor);
         g.drawRect(x, y,
-                Math.abs(this.pointMemo.get(1).x - x),
-                Math.abs(this.pointMemo.get(1).y - y));
+                this.pointMemo.get(1).x - x,
+                this.pointMemo.get(1).y - y);
     }
 }
