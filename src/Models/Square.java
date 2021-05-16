@@ -28,6 +28,8 @@ public class Square extends ShapeGeom {
     public void draw(Graphics g) {
         int x = this.pointMemo.get(0).x;
         int y = this.pointMemo.get(0).y;
+
+        g.setColor(this.borderColor);
         g.drawRect(x, y,
                 Math.abs(this.pointMemo.get(1).x - x),
                 Math.abs(this.pointMemo.get(1).y - y));

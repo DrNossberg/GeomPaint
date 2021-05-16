@@ -25,7 +25,6 @@ public class GeomPain {
         JFrame frame = new JFrame("Our super rectangle!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        cv.addMouseListener(cc);
         cv.addMouseMotionListener(cc);
 
         cv.setPreferredSize(new Dimension(500, 500));
