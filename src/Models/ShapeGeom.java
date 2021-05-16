@@ -71,6 +71,5 @@ public abstract class ShapeGeom extends Polygon {
     }
 
     public abstract void draw(Graphics g);
-    public abstract void dump();
     public abstract boolean intersects(Rectangle r);
 }

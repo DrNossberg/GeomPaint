@@ -29,8 +29,8 @@ import Models.ShapeGeom;
 import Models.ShapeType;
 
 public class CanvasController extends MouseAdapter implements MouseListener, MouseMotionListener {
-    private final ArrayList<Point> points = new ArrayList<>();
     private final Mediator m;
+    private ArrayList<Point> points = new ArrayList<>();
     private ShapeGeom shape;
     private ShapeType shapeType = ShapeType.RECTANGLE;
     private boolean finished = true;
@@ -60,7 +60,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
             return;
         if (finished && this.m.shapeIntersect(e)) {
             System.out.println("intersect !");
-            this.points = this.m.getSaisiePoint();
+            this.points = this.m.getSelectedShape().getSaisiePoint();
             // for (Point p : this.points)
                 // créer image du point
             return;
