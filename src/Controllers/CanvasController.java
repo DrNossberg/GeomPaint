@@ -1,9 +1,18 @@
-package Controllers;
+/*
+** IUT Nancy-Charlemagne, 2021
+** Projet :
+**    Labythin
+** Author :
+**    Erin      Bernardoni
+**    Antoine   Orion
+**    Valentine INGARDIN
+**    Maroua    MELKI
+** File description :
+**    
+**    
+*/
 
-import Models.*;
-import Models.Square;
-import Models.ShapeGeom;
-import Models.ShapeType;
+package Controllers;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +23,10 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 
+import Models.*;
+import Models.Square;
+import Models.ShapeGeom;
+import Models.ShapeType;
 
 public class CanvasController extends MouseAdapter implements MouseListener, MouseMotionListener {
     private final ArrayList<Point> points = new ArrayList<>();
@@ -30,12 +43,8 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
 
     public void mouseMoved(MouseEvent e) {
         if (!this.finished && shapeType == ShapeType.RECTANGLE) {
-            System.out.println("here too");
             m.setSelectedShape(new Square(points.get(0), e.getPoint()));
         }
-        // System.out.println("ladz!");
-
-    //     // repaint();
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -52,10 +61,11 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         this.points.add(new Point(e.getX(), e.getY()));
         this.finished = false;
         if (this.points.size() == this.shapeType.getMaxMemoPoint()) {
-        System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
+        // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
             this.m.addShape(new Square(points.get(0), points.get(1)));
             this.points.clear();
             this.finished = true;
+            this.shape = null;
         }
     }
 
