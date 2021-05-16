@@ -53,10 +53,8 @@ public class Mediator extends Observable {
     }
 
     public void draw(Graphics g) {
-        if (this.selectedShape != null) {
-            System.out.println("printing ?");
+        if (this.selectedShape != null)
             this.selectedShape.draw(g);
-        }
         for (ShapeGeom shape : this.shapes)
             shape.draw(g);
     }

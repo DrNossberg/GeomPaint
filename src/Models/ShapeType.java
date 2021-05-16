@@ -16,6 +16,7 @@ package Models;
 
 
 public enum ShapeType {
+    NONE(0),
     RECTANGLE(2),
     CIRCLE(2),
     POLYGONE(-1);

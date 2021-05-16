@@ -1,12 +1,12 @@
 package Views;
 
-import Controllers.CanvasController;
 
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.JPanel;
+
+import Controllers.CanvasController;
 
 @SuppressWarnings("deprecation")
 public class CanvasView extends JPanel implements Observer {
