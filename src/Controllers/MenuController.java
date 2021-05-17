@@ -16,37 +16,31 @@ public class MenuController implements ActionListener {
                 Color color = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
 
                 System.out.println("Choosen color: " + color);
+            	break;
             }
+            case "Fill shape" ->{
+            	clearFigure();
+            	break;
+            }
+            case "Erase shape" ->{
+            	clearFigure();
+            	break;
+            }
+            case "Bring forward" ->{
+            	forwardFigure();
+            	break;
+            }
+           case "Send backward" ->{
+            	backwardFigure();
+            	break;
+            }
+            case "Erase all" ->{
+            	getGraphics().clearReact(0, 0, getWidht(), getHeight());
+            	clear();
+            	break;
+            }
+            
         }
     }
 }
 
-/*public void actionPerformed(ActionEvent e){
-				switch (couleurs.getSelectedIndex()){
-					case 0:
-						setColor(Color.black);
-						break;
-					case 1:
-						setColor(Color.grey);
-						break;
-					case 2:
-						setColor(Color.red);
-						break;
-					case 3:
-						setColor(Color.green);
-						break;
-					case 4:
-						setColor(Color.blue);
-						break;
-					case 5:
-						setColor(Color.violet);
-						break;
-					case 6:
-						setColor(Color.yellow);
-						break;
-					case 7:
-						setColor(Color.orange);
-						break;
-				}
-				repaint();
-			}*/

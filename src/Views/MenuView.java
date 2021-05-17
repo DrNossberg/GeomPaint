@@ -82,7 +82,7 @@ public class MenuView extends JPanel{
 		toolButtons[0] = new JButton("Fill shape");
 		toolButtons[1] = new JButton("Erase shape");
 		toolButtons[2] = new JButton("Bring forward");
-		toolButtons[3] = new JButton("Send backwards");
+		toolButtons[3] = new JButton("Send backward");
 		toolButtons[4] = new JButton("Erase all");
 
 		for (JButton btn : toolButtons) {
