@@ -29,8 +29,8 @@ import Models.ShapeGeom;
 import Models.ShapeType;
 
 public class CanvasController extends MouseAdapter implements MouseListener, MouseMotionListener {
-    private final ArrayList<Point> points = new ArrayList<>();
     private final Mediator m;
+    private ArrayList<Point> points = new ArrayList<>();
     private ShapeGeom shape;
     private ShapeType shapeType = ShapeType.RECTANGLE;
     private boolean finished = true;
@@ -58,11 +58,18 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     public void mousePressed(MouseEvent e) {
         if (!SwingUtilities.isLeftMouseButton(e))
             return;
+        if (finished && this.m.shapeIntersect(e)) {
+            System.out.println("intersect !");
+            this.points = this.m.getSelectedShape().getSaisiePoint();
+            // for (Point p : this.points)
+                // créer image du point
+            return;
+        }
         this.points.add(new Point(e.getX(), e.getY()));
         this.finished = false;
         if (this.points.size() == this.shapeType.getMaxMemoPoint()) {
-        // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
-            this.m.addShape(new Square(points.get(0), points.get(1)));
+            if (this.shapeType == ShapeType.RECTANGLE)
+                this.m.addShape(new Square(points.get(0), points.get(1)));
             this.points.clear();
             this.finished = true;
             this.shape = null;

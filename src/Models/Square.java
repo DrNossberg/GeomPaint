@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.lang.Math;
 
 public class Square extends ShapeGeom {
+    protected final Rectangle rect;
     protected final List<Boolean> showedMemo = Arrays.asList(true, false, true, false);
      // ArrayList<Boolean>  = new ArrayList<>(Arrays.asList());
 
@@ -21,10 +22,13 @@ public class Square extends ShapeGeom {
                                     (int) Math.min(a.getY(), b.getY()));
         Point downRight = new Point((int) Math.max(a.getX(), b.getX()),
                                     (int) Math.max(a.getY(), b.getY()));
-        System.out.println("TL : " + topLeft.getX() + ", " + topLeft.getY() +
-            "DR : " + downRight.getX() + ", " + downRight.getY());
         super.pointMemo.add(topLeft);
         super.pointMemo.add(downRight);
+
+        this.rect = new Rectangle (
+                topLeft.x, topLeft.y,
+                downRight.x - topLeft.x,
+                downRight.y - topLeft.y);
     }
 
     @Override
@@ -35,12 +39,20 @@ public class Square extends ShapeGeom {
 
     @Override
     public void draw(Graphics g) {
-        int x = this.pointMemo.get(0).x;
-        int y = this.pointMemo.get(0).y;
-
         g.setColor(this.borderColor);
-        g.drawRect(x, y,
-                this.pointMemo.get(1).x - x,
-                this.pointMemo.get(1).y - y);
+        g.drawRect((int) this.rect.getX(), (int) this.rect.getY(),
+            (int) this.rect.getWidth(), (int) this.rect.getHeight());
+    }
+
+    public boolean intersects(Rectangle r) {
+        //possibility to overload contain here
+        return (this.rect.intersects(r) && !this.rect.contains(r));
+    }
+
+    public String toString() {
+        return("["+ this.rect.getX() + ", " + 
+                    this.rect.getY() + "] w:" + 
+                    this.rect.getWidth() + " h: " + 
+                    this.rect.getHeight());
     }
 }
