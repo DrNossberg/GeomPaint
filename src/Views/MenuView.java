@@ -57,12 +57,16 @@ public class MenuView extends JPanel{
 		JButton[] shapeButtons = new JButton[4];
 		shapeButtons[0] = new JButton();
 		shapeButtons[0].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/polygon_icon.png"))));
+		shapeButtons[0].setName("draw_polygon");
 		shapeButtons[1] = new JButton();
 		shapeButtons[1].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/rectangle_icon.png"))));
+		shapeButtons[1].setName("draw_rectangle");
 		shapeButtons[2] = new JButton();
 		shapeButtons[2].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/triangle_icon.png"))));
+		shapeButtons[2].setName("draw_triangle");
 		shapeButtons[3] = new JButton();
 		shapeButtons[3].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/circle_icon.png"))));
+		shapeButtons[3].setName("draw_circle");
 
 		for (JButton btn : shapeButtons) {
 			btn.setBackground(Color.white);
@@ -80,10 +84,16 @@ public class MenuView extends JPanel{
 		toolsPanel.add(createSubMenuLabel("Edit"));
 		JButton[] toolButtons = new JButton[5];
 		toolButtons[0] = new JButton("Fill shape");
+		toolButtons[0].setName("fill_shape");
 		toolButtons[1] = new JButton("Erase shape");
+		toolButtons[1].setName("erase_shape");
 		toolButtons[2] = new JButton("Bring forward");
+		toolButtons[2].setName("bring_forward");
 		toolButtons[3] = new JButton("Send backward");
+		toolButtons[3].setName("send_backward");
 		toolButtons[4] = new JButton("Erase all");
+		toolButtons[4].setName("erase_all");
+
 
 		for (JButton btn : toolButtons) {
 			buttonFormat(btn);
@@ -98,6 +108,7 @@ public class MenuView extends JPanel{
 
 		colorPanel.add(createSubMenuLabel("Color"));
 		JButton btn = new JButton("Pick a color");
+		btn.setName("pick_color");
 		btn.setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/palette-de-couleurs.png"))));
 		buttonFormat(btn);
 		colorPanel.add(btn);
