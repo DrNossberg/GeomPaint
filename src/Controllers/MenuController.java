@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
+@SuppressWarnings("deprecation")
 public class MenuController extends Observable implements ActionListener {
     private CanvasController cc;
     Color selectedColor = Color.BLACK;
