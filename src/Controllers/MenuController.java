@@ -6,9 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
-public class MenuController implements ActionListener {
+public class MenuController extends Observable implements ActionListener {
     private CanvasController cc;
+    Color selectedColor = Color.BLACK;
 
     public MenuController(CanvasController cc) {
         this.cc = cc;
@@ -21,9 +23,13 @@ public class MenuController implements ActionListener {
         switch (btnText) {
             case "pick_color" -> {
                 JColorChooser colorChooser = new JColorChooser();
-                Color color = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
+                this.selectedColor = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
 
-                System.out.println("Choosen color: " + color);
+                System.out.println("Choosen color: " + this.selectedColor);
+
+                setChanged();
+                notifyObservers();
+
             }
             // Shapes buttons
             case "draw_polygon" -> {
@@ -41,7 +47,9 @@ public class MenuController implements ActionListener {
 
             // Edit buttons
             case "fill_shape" ->{
-//            	clearFigure();
+            	if (this.selectedColor != null) {
+            	    this.cc.getMediator().getSelectedShape().setColor(this.selectedColor);
+                }
             }
             case "erase_shape" ->{
 //            	clearFigure();
@@ -58,6 +66,10 @@ public class MenuController implements ActionListener {
             }
             
         }
+    }
+
+    public Color getSelectedColor() {
+        return this.selectedColor;
     }
 }
 
