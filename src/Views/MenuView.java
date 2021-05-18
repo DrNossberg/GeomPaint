@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,11 +18,13 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-public class MenuView extends JPanel{
+@SuppressWarnings("deprecation")
+public class MenuView extends JPanel implements Observer {
 	private MenuController mc;
 
 	public MenuView(MenuController mc){
 		this.mc = mc;
+		mc.addObserver(this);
 
 		Border panelBorder = BorderFactory.createLineBorder(Color.black);
 		this.setBorder(panelBorder);
@@ -43,13 +47,13 @@ public class MenuView extends JPanel{
 		this.add(toolsPanel);
 
 		JPanel colorsPanel = createColorPanel();
-		colorsPanel.setPreferredSize(new Dimension(198, 70));
+		colorsPanel.setPreferredSize(new Dimension(198, 90));
 		colorsPanel.setBorder(subMenuBorder);
 		this.add(colorsPanel);
 
 	}
-	public void paintComponent(Graphics g){
-			super.paintComponent(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 
 
@@ -130,12 +134,21 @@ public class MenuView extends JPanel{
 		buttonFormat(btn);
 		colorPanel.add(btn);
 
+		JLabel colorLbl = new JLabel("Selected color:", JLabel.LEFT);
+		colorLbl.setPreferredSize(new Dimension(100, 15));
+		colorLbl.setFont(new Font("Helvetica", Font.BOLD, 13));
+		colorPanel.add(colorLbl);
+
+		JPanel draw = new drawRect();
+		draw.setPreferredSize(new Dimension(70, 15));
+		colorPanel.add(draw);
+
 		return colorPanel;
 	}
 
 	public JLabel createSubMenuLabel(String txt) {
 		JLabel lbl = new JLabel(txt, JLabel.CENTER);
-		lbl.setPreferredSize(new Dimension(198, 20));
+		lbl.setPreferredSize(new Dimension(70, 20));
 		lbl.setFont(new Font("Helvetica", Font.BOLD, 15));
 
 		return lbl;
@@ -147,5 +160,18 @@ public class MenuView extends JPanel{
 		btn.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		btn.setBorder(new EtchedBorder());
 		btn.addActionListener(mc);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
+	}
+
+	public class drawRect extends JPanel {
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.setColor(mc.getSelectedColor());
+			g.fillRect(0, 0, 70, 50);
+		}
 	}
 }
