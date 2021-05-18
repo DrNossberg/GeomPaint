@@ -1,5 +1,8 @@
+package App;
+
 import Controllers.CanvasController;
 import Controllers.MenuController;
+import Models.AssetLoader;
 import Models.Mediator;
 import Views.CanvasView;
 import Views.MenuView;
@@ -12,7 +15,10 @@ import javax.swing.JFrame;
 import java.awt.*;
 
 public class GeomPain {
+    public static final AssetLoader ASSERT_LOADER = new AssetLoader("./src");
+
     public static void main(String[] args) {
+
         Mediator m = new Mediator();
 
         // Link model to controller

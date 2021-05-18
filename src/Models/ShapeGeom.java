@@ -14,8 +14,12 @@
 package Models;
 
 
+import App.GeomPain;
+
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Observable;
 import java.awt.Polygon;
 import java.util.List;
@@ -42,9 +46,9 @@ public abstract class ShapeGeom extends Polygon {
         this.pointMemo = points;
         this.displayMemo = false;
         try {
-            memoImage = ImageIO.read(this.getClass().getResource("../resources/memoPoint.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            memoImage = ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("memoPoint"));
+        } catch (Exception e) {
+            GeomPain.ASSERT_LOADER.printError("memoPoint");
         }
     }
 

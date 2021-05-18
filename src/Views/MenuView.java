@@ -1,12 +1,16 @@
 package Views;
 
+import App.GeomPain;
 import Controllers.MenuController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -57,13 +61,29 @@ public class MenuView extends JPanel{
 		JButton[] shapeButtons = new JButton[4];
 
 		shapeButtons[0] = new JButton();
-		shapeButtons[0].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/polygon_icon.png"))));
+		try {
+			shapeButtons[0].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("polygon_icon"))));
+		} catch (Exception e) {
+			GeomPain.ASSERT_LOADER.printError("polygon_icon");
+		}
 		shapeButtons[1] = new JButton();
-		shapeButtons[1].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/rectangle_icon.png"))));
+		try {
+			shapeButtons[1].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("rectangle_icon"))));
+		} catch (Exception e) {
+			GeomPain.ASSERT_LOADER.printError("rectangle_icon");
+		}
 		shapeButtons[2] = new JButton();
-		shapeButtons[2].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/triangle_icon.png"))));
+		try {
+			shapeButtons[2].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("triangle_icon"))));
+		} catch (Exception e) {
+			GeomPain.ASSERT_LOADER.printError("triangle_icon");
+		}
 		shapeButtons[3] = new JButton();
-		shapeButtons[3].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/circle_icon.png"))));
+		try {
+			shapeButtons[3].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("circle_icon"))));
+		} catch (Exception e) {
+			GeomPain.ASSERT_LOADER.printError("circle_icon");
+		}
 
 		for (JButton btn : shapeButtons) {
 			btn.setBackground(Color.white);
