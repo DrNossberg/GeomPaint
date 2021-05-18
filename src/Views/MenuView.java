@@ -81,10 +81,16 @@ public class MenuView extends JPanel{
 		toolsPanel.add(createSubMenuLabel("Edit"));
 		JButton[] toolButtons = new JButton[5];
 		toolButtons[0] = new JButton("Fill shape");
+		toolButtons[0].setName("fill_shape");
 		toolButtons[1] = new JButton("Erase shape");
+		toolButtons[1].setName("erase_shape");
 		toolButtons[2] = new JButton("Bring forward");
-		toolButtons[3] = new JButton("Send backwards");
+		toolButtons[2].setName("bring_forward");
+		toolButtons[3] = new JButton("Send backward");
+		toolButtons[3].setName("send_backward");
 		toolButtons[4] = new JButton("Erase all");
+		toolButtons[4].setName("erase_all");
+
 
 		for (JButton btn : toolButtons) {
 			buttonFormat(btn);
@@ -99,6 +105,7 @@ public class MenuView extends JPanel{
 
 		colorPanel.add(createSubMenuLabel("Color"));
 		JButton btn = new JButton("Pick a color");
+		btn.setName("pick_color");
 		btn.setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/palette-de-couleurs.png"))));
 		buttonFormat(btn);
 		colorPanel.add(btn);

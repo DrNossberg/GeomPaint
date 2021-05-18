@@ -29,10 +29,11 @@ import Models.ShapeGeom;
 import Models.ShapeType;
 
 public class CanvasController extends MouseAdapter implements MouseListener, MouseMotionListener {
+    private final ArrayList<Point> points = new ArrayList<>();
     private final Mediator m;
-    private ArrayList<Point> points = new ArrayList<>();
     private ShapeGeom shape;
-    private ShapeType shapeType = ShapeType.RECTANGLE;
+    private ShapeType shapeType;
+    private boolean canDraw = false;
     private boolean finished = true;
 
     public CanvasController(Mediator m) {
@@ -40,9 +41,15 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         this.m = m;
     }
 
+
     public void mouseMoved(MouseEvent e) {
-        if (!this.finished && shapeType == ShapeType.RECTANGLE) {
-            m.setSelectedShape(new Square(points.get(0), e.getPoint()));
+        if (!this.finished) {
+            switch (shapeType) {
+                case POLYGONE: break;
+                case RECTANGLE: m.setSelectedShape(new Square(points.get(0), e.getPoint()));
+                case TRIANGLE:break;
+                case CIRCLE: break;
+            }
         }
     }
 
@@ -56,7 +63,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     }
 
     public void mousePressed(MouseEvent e) {
-        if (!SwingUtilities.isLeftMouseButton(e))
+        if (!SwingUtilities.isLeftMouseButton(e) || !canDraw)
             return;
         // if (finished && )
         if (finished && this.m.shapeIntersect(e)) {
@@ -66,16 +73,35 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         this.points.add(new Point(e.getX(), e.getY()));
         this.finished = false;
         if (this.points.size() == this.shapeType.getMaxMemoPoint()) {
-            if (this.shapeType == ShapeType.RECTANGLE)
-                this.m.addShape(new Square(points.get(0), points.get(1)));
+            // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
+            switch (shapeType) {
+                case POLYGONE: break;
+                case RECTANGLE: this.m.addShape(new Square(points.get(0), points.get(1)));
+                case TRIANGLE: break;
+                case CIRCLE: break;
+            }
             this.points.clear();
             this.finished = true;
             this.shape = null;
             this.shapeType = ShapeType.NONE;
+            this.canDraw = false;
         }
     }
 
     public Mediator getMediator() {
         return (this.m);
     }
+
+
+    public void initiateShape(ShapeType type) {
+        if (canDraw) {
+            this.points.clear();
+            this.finished = true;
+        }
+        this.shapeType = type;
+        this.canDraw = true;
+
+    }
+
+
 }
