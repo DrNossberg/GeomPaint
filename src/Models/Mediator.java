@@ -60,14 +60,16 @@ public class Mediator extends Observable {
 
     public Point memoIntersect(MouseEvent e) {
         Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 10, 10);
+        ArrayList<Point> mp;
 
         if (this.selectedShape == null)
             return (null);
-        for (Point mp : this.selectedShape.getSaisiePoint()) {
-            if (click.intersects(new Rectangle ((int) mp.getX() - 10, (int)  mp.getY() - 10, 10, 10))) {
-                return (mp);
+        mp = this.selectedShape.getSaisiePoint();
+        for (int i = 0; i < mp.size() ; i++)
+            if (click.intersects(new Rectangle ((int) mp.get(i).getX() - 10, (int)  mp.get(i).getY() - 10, 10, 10))) {
+                this.selectedShape.setSelectedMemo(i);
+                return (mp.get(i));
             }
-        }
         return (null);
     }
 

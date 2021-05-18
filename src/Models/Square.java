@@ -35,12 +35,23 @@ public class Square extends ShapeGeom {
         Point topLeft = super.pointMemo.get(0);
         Point downRight = super.pointMemo.get(2);
 
+        if (super.selectedMemo == 0) {
+            if (topLeft.y >= downRight.y)
+                topLeft.y = downRight.y - 1;
+            if (topLeft.x >= downRight.x)
+                topLeft.x = downRight.x - 1;
+        }
+        if (super.selectedMemo == 1) {
+            if (downRight.y <= topLeft.y)
+                downRight.y = topLeft.y + 1;
+            if (downRight.x <= topLeft.x)
+                downRight.x = topLeft.x + 1;
+        }
         this.rect.setBounds(topLeft.x, topLeft.y,
                 downRight.x - topLeft.x,
                 downRight.y - topLeft.y);
-        // System.out.println("tp y : " + topLeft.y + " dR y: " + downRight.y);
-        // System.out.println(this.rect.getBounds());
     }
+
     // public void fill(Color c){}
 
     @Override

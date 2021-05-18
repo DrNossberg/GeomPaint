@@ -35,6 +35,7 @@ public abstract class ShapeGeom extends Polygon {
     protected boolean displayMemo;
     protected Image memoImage;
     protected int maxMemoPoint;
+    protected int selectedMemo;
 
     ShapeGeom() {}
 
@@ -46,6 +47,7 @@ public abstract class ShapeGeom extends Polygon {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.selectedMemo = -1;
     }
 
     public void translate(int offset_x, int offest_y) {
@@ -61,7 +63,9 @@ public abstract class ShapeGeom extends Polygon {
         this.borderColor = c;
     }
 
-
+    public void setSelectedMemo(int index) {
+        this.selectedMemo = index;
+    }
 
     // public void displayMemoPoints() {
         // getSaisiePoint()
