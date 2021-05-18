@@ -25,16 +25,21 @@ public class Square extends ShapeGeom {
         super.pointMemo.add(downRight);
         super.pointMemo.add(new Point(topLeft.x, downRight.y));
 
-        this.rect = new Rectangle (
-                topLeft.x, topLeft.y,
-                downRight.x - topLeft.x,
-                downRight.y - topLeft.y);
         this.showedMemo = Arrays.asList(true, false, true, false);
+        this.rect = new Rectangle(0, 0, -1, -1); // new Rectangle(points) ?
+        updateShape();
     }
 
     @Override
-    public void modifyShape() {
+    public void updateShape() {
+        Point topLeft = super.pointMemo.get(0);
+        Point downRight = super.pointMemo.get(2);
 
+        this.rect.setBounds(topLeft.x, topLeft.y,
+                downRight.x - topLeft.x,
+                downRight.y - topLeft.y);
+        // System.out.println("tp y : " + topLeft.y + " dR y: " + downRight.y);
+        // System.out.println(this.rect.getBounds());
     }
     // public void fill(Color c){}
 

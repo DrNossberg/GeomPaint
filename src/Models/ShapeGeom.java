@@ -43,7 +43,6 @@ public abstract class ShapeGeom extends Polygon {
         this.displayMemo = false;
         try {
             memoImage = ImageIO.read(this.getClass().getResource("../resources/memoPoint.png"));
-            System.out.println("well loaded ?");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,7 +67,7 @@ public abstract class ShapeGeom extends Polygon {
         // getSaisiePoint()
     // }
 
-    public abstract void modifyShape();
+    public abstract void updateShape();
 
     public void addMemoPoint(Point p) {
         this.pointMemo.add(p);
@@ -78,18 +77,10 @@ public abstract class ShapeGeom extends Polygon {
         ArrayList<Point> tmp = new ArrayList<>();
 
         for (int i = 0; i < this.pointMemo.size(); i++) {
-            System.out.println("point");
             if (this.showedMemo.get(i))
                 tmp.add(this.pointMemo.get(i));
         }
-        System.out.println("tmp :" + tmp.size() );
         return (tmp);
-    }
-    
-    public void modifyMemoPoint(int pointIndex, Point nw_coord) {
-        if (this.pointMemo.size() < pointIndex)
-            return;
-        this.pointMemo.set(pointIndex, nw_coord);
     }
 
     public abstract void draw(Graphics g);
@@ -102,6 +93,7 @@ public abstract class ShapeGeom extends Polygon {
                 mp.x - (w / 2),
                 mp.y - (h / 2), null);
         }
+
 
     }
     public abstract boolean intersects(Rectangle r);

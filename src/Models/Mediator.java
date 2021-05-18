@@ -47,7 +47,7 @@ public class Mediator extends Observable {
     }
 
     public boolean shapeIntersect(MouseEvent e) {
-        Rectangle click = new Rectangle(e.getX() - 1, e.getY() - 1, 30, 30);
+        Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 30, 30);
 
         for (ShapeGeom shape : this.shapes) {
             if (shape.intersects(click)) {
@@ -58,13 +58,24 @@ public class Mediator extends Observable {
         return (false);
     }
 
+    public Point memoIntersect(MouseEvent e) {
+        Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 10, 10);
+
+        if (this.selectedShape == null)
+            return (null);
+        for (Point mp : this.selectedShape.getSaisiePoint()) {
+            if (click.intersects(new Rectangle ((int) mp.getX() - 10, (int)  mp.getY() - 10, 10, 10))) {
+                return (mp);
+            }
+        }
+        return (null);
+    }
 
     public void translate(int offset_x, int offset_y) {
         this.selectedShape.translate(offset_x, offset_y);
     }
 
     public void draw(Graphics g) {
-        System.out.println("drawing");
         if (this.selectedShape != null) {
             this.selectedShape.drawMemo(g);
             this.selectedShape.draw(g);
