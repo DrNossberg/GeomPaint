@@ -24,6 +24,10 @@ public class Mediator extends Observable {
 
     public void setSelectedShape(ShapeGeom shape) {
         this.selectedShape = shape;
+        update();
+    }
+
+    public void update() {
         setChanged();
         notifyObservers();
     }
@@ -39,8 +43,7 @@ public class Mediator extends Observable {
     public void addShape(ShapeGeom shape) {
         this.shapes.add(0, shape);
         this.selectedShape = shape;
-        setChanged();
-        notifyObservers();
+        update();
     }
 
     public boolean shapeIntersect(MouseEvent e) {
@@ -61,8 +64,11 @@ public class Mediator extends Observable {
     }
 
     public void draw(Graphics g) {
-        if (this.selectedShape != null)
+        System.out.println("drawing");
+        if (this.selectedShape != null) {
+            this.selectedShape.drawMemo(g);
             this.selectedShape.draw(g);
+        }
         for (ShapeGeom shape : this.shapes)
             shape.draw(g);
     }

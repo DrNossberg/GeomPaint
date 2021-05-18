@@ -38,7 +38,6 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     public CanvasController(Mediator m) {
         super();
         this.m = m;
-
     }
 
     public void mouseMoved(MouseEvent e) {
@@ -52,17 +51,16 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     }
 
     public void mouseDragged(MouseEvent e) {
+
         // System.out.println("hereqfefe");
     }
 
     public void mousePressed(MouseEvent e) {
         if (!SwingUtilities.isLeftMouseButton(e))
             return;
+        // if (finished && )
         if (finished && this.m.shapeIntersect(e)) {
-            System.out.println("intersect !");
-            this.points = this.m.getSelectedShape().getSaisiePoint();
-            // for (Point p : this.points)
-                // créer image du point
+            this.m.update();
             return;
         }
         this.points.add(new Point(e.getX(), e.getY()));
@@ -73,6 +71,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
             this.points.clear();
             this.finished = true;
             this.shape = null;
+            this.shapeType = ShapeType.NONE;
         }
     }
 

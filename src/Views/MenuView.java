@@ -55,14 +55,15 @@ public class MenuView extends JPanel{
 		shapesPanel.add(createSubMenuLabel("Shapes"));
 
 		JButton[] shapeButtons = new JButton[4];
+
 		shapeButtons[0] = new JButton();
-		shapeButtons[0].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/polygon_icon.png"))));
+		shapeButtons[0].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/polygon_icon.png"))));
 		shapeButtons[1] = new JButton();
-		shapeButtons[1].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/rectangle_icon.png"))));
+		shapeButtons[1].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/rectangle_icon.png"))));
 		shapeButtons[2] = new JButton();
-		shapeButtons[2].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/triangle_icon.png"))));
+		shapeButtons[2].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/triangle_icon.png"))));
 		shapeButtons[3] = new JButton();
-		shapeButtons[3].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/circle_icon.png"))));
+		shapeButtons[3].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/circle_icon.png"))));
 
 		for (JButton btn : shapeButtons) {
 			btn.setBackground(Color.white);
@@ -98,7 +99,7 @@ public class MenuView extends JPanel{
 
 		colorPanel.add(createSubMenuLabel("Color"));
 		JButton btn = new JButton("Pick a color");
-		btn.setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/Ressources/palette-de-couleurs.png"))));
+		btn.setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/palette-de-couleurs.png"))));
 		buttonFormat(btn);
 		colorPanel.add(btn);
 

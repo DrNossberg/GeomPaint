@@ -10,14 +10,14 @@ public class MenuController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String btnText = ((JButton) e.getSource()).getText();
 
-        switch (btnText) {
-            case "Pick a color" -> {
-                JColorChooser colorChooser = new JColorChooser();
-                Color color = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
+        // switch (btnText) {
+        //     case "Pick a color" -> {
+        //         JColorChooser colorChooser = new JColorChooser();
+        //         Color color = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
 
-                System.out.println("Choosen color: " + color);
-            }
-        }
+        //         System.out.println("Choosen color: " + color);
+        //     }
+        // }
     }
 }
 

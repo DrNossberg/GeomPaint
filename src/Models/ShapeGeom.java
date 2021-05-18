@@ -20,6 +20,10 @@ import java.util.Observable;
 import java.awt.Polygon;
 import java.util.List;
 
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
 
 @SuppressWarnings("deprecation")
 public abstract class ShapeGeom extends Polygon {
@@ -28,12 +32,21 @@ public abstract class ShapeGeom extends Polygon {
     protected int thickness;
     protected ArrayList<Point> pointMemo;
     protected List<Boolean> showedMemo;
+    protected boolean displayMemo;
+    protected Image memoImage;
     protected int maxMemoPoint;
 
     ShapeGeom() {}
 
     ShapeGeom(ArrayList<Point> points) {
         this.pointMemo = points;
+        this.displayMemo = false;
+        try {
+            memoImage = ImageIO.read(this.getClass().getResource("../resources/memoPoint.png"));
+            System.out.println("well loaded ?");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void translate(int offset_x, int offest_y) {
@@ -50,7 +63,13 @@ public abstract class ShapeGeom extends Polygon {
     }
 
 
+
+    // public void displayMemoPoints() {
+        // getSaisiePoint()
+    // }
+
     public abstract void modifyShape();
+
     public void addMemoPoint(Point p) {
         this.pointMemo.add(p);
     }
@@ -58,9 +77,12 @@ public abstract class ShapeGeom extends Polygon {
     public ArrayList<Point> getSaisiePoint() {
         ArrayList<Point> tmp = new ArrayList<>();
 
-        for (int i = 0; i < pointMemo.size(); i++)
-            if (showedMemo.get(i))
-                tmp.add(pointMemo.get(i));
+        for (int i = 0; i < this.pointMemo.size(); i++) {
+            System.out.println("point");
+            if (this.showedMemo.get(i))
+                tmp.add(this.pointMemo.get(i));
+        }
+        System.out.println("tmp :" + tmp.size() );
         return (tmp);
     }
     
@@ -71,5 +93,16 @@ public abstract class ShapeGeom extends Polygon {
     }
 
     public abstract void draw(Graphics g);
+    public void drawMemo(Graphics g) {
+        int w = this.memoImage.getWidth(null);
+        int h = this.memoImage.getHeight(null);
+
+        for (Point mp : getSaisiePoint()) {
+            g.drawImage(this.memoImage,
+                mp.x - (w / 2),
+                mp.y - (h / 2), null);
+        }
+
+    }
     public abstract boolean intersects(Rectangle r);
 }
