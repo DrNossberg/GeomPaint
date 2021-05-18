@@ -52,42 +52,32 @@ public class MenuView extends JPanel implements Observer {
 		this.add(colorsPanel);
 
 	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	}
 
+	public JButton createShapeButton(String asset_name) {
+		JButton tmp = new JButton();
+
+		try {
+			tmp.setName(asset_name);
+			tmp.setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset(asset_name))));
+		} catch (Exception e) {
+			GeomPain.ASSERT_LOADER.printError(asset_name);
+		}
+		return (tmp);
+	}
 
 	public JPanel createShapesPanel() {
 		JPanel shapesPanel = new JPanel();
-
-		shapesPanel.add(createSubMenuLabel("Shapes"));
-
 		JButton[] shapeButtons = new JButton[4];
 
-		shapeButtons[0] = new JButton();
-		try {
-			shapeButtons[0].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("polygon_icon"))));
-		} catch (Exception e) {
-			GeomPain.ASSERT_LOADER.printError("polygon_icon");
-		}
-		shapeButtons[1] = new JButton();
-		try {
-			shapeButtons[1].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("rectangle_icon"))));
-		} catch (Exception e) {
-			GeomPain.ASSERT_LOADER.printError("rectangle_icon");
-		}
-		shapeButtons[2] = new JButton();
-		try {
-			shapeButtons[2].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("triangle_icon"))));
-		} catch (Exception e) {
-			GeomPain.ASSERT_LOADER.printError("triangle_icon");
-		}
-		shapeButtons[3] = new JButton();
-		try {
-			shapeButtons[3].setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("circle_icon"))));
-		} catch (Exception e) {
-			GeomPain.ASSERT_LOADER.printError("circle_icon");
-		}
+		shapesPanel.add(createSubMenuLabel("Shapes"));
+		shapeButtons[0] = createShapeButton("polygon_icon");
+		shapeButtons[1] = createShapeButton("rectangle_icon");
+		shapeButtons[2] = createShapeButton("triangle_icon");
+		shapeButtons[3] = createShapeButton("circle_icon");
 
 		for (JButton btn : shapeButtons) {
 			btn.setBackground(Color.white);
@@ -96,7 +86,7 @@ public class MenuView extends JPanel implements Observer {
 			shapesPanel.add(btn);
 		}
 
-		return shapesPanel;
+		return (shapesPanel);
 	}
 
 	public JPanel createToolsPanel() {

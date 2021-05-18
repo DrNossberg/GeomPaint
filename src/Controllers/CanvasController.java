@@ -31,17 +31,14 @@ import Models.ShapeType;
 public class CanvasController extends MouseAdapter implements MouseListener, MouseMotionListener {
     private final ArrayList<Point> points = new ArrayList<>();
     private final Mediator m;
-    private ShapeGeom shape;
-    private ShapeType shapeType = ShapeType.RECTANGLE;
+    private ShapeType shapeType = ShapeType.NONE;
     private boolean finished = true;
     private Point curr = null;
-    // private boolean canDraw = false;
 
     public CanvasController(Mediator m) {
         super();
         this.m = m;
     }
-
 
     public void mouseMoved(MouseEvent e) {
         if (!this.finished) {
@@ -70,7 +67,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
 
     public void mousePressed(MouseEvent e) {
         // if (!SwingUtilities.isLeftMouseButton(e) || !canDraw)
-        if (!SwingUtilities.isLeftMouseButton(e))
+        if (!SwingUtilities.isLeftMouseButton(e) || this.shapeType == ShapeType.NONE)
             return;
         if (finished && this.m.getSelectedShape() != null) {
             if (this.curr == null)
@@ -95,7 +92,6 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
             }
             this.points.clear();
             this.finished = true;
-            this.shape = null;
             this.shapeType = ShapeType.NONE;
             // this.canDraw = false;
         }
@@ -107,12 +103,9 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
 
 
     public void initiateShape(ShapeType type) {
-        // if (canDraw) {
         this.points.clear();
-        this.finished = true;
-        // }
+        // this.finished = true;
         this.shapeType = type;
-        // this.canDraw = true;
 
     }
 
