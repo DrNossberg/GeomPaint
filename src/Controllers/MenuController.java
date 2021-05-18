@@ -1,5 +1,7 @@
 package Controllers;
 
+import Models.ShapeType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +26,25 @@ public class MenuController implements ActionListener {
                 System.out.println("Choosen color: " + color);
             	break;
             }
+            // Shapes buttons
+            case "draw_polygon" -> {
+                cc.initiateShape(ShapeType.POLYGONE);
+                break;
+            }
+            case "draw_rectangle" -> {
+                cc.initiateShape(ShapeType.RECTANGLE);
+                break;
+            }
+            case "draw_triangle" -> {
+                cc.initiateShape(ShapeType.TRIANGLE);
+                break;
+            }
+            case "draw_circle" -> {
+                cc.initiateShape(ShapeType.CIRCLE);
+                break;
+            }
+
+            // Edit buttons
             case "fill_shape" ->{
 //            	clearFigure();
             	break;

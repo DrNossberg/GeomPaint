@@ -17,7 +17,7 @@ public class GeomPain {
 
         // Link model to controller
         CanvasController cc = new CanvasController(m);
-        MenuController mc = new MenuController();
+        MenuController mc = new MenuController(cc);
 
         // Link controller to view
         CanvasView cv = new CanvasView(cc);
