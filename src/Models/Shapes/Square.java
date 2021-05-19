@@ -1,4 +1,7 @@
-package Models;
+package Models.Shapes;
+
+import Models.Mediator;
+import Models.ShapeGeom;
 
 import java.awt.*;
 import java.util.List;
