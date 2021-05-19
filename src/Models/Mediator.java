@@ -1,5 +1,9 @@
 package Models;
 
+import Models.Shapes.Circle;
+import Models.Shapes.Polygon;
+import Models.Shapes.Square;
+
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -36,21 +40,21 @@ public class Mediator extends Observable {
         notifyObservers();
     }
 
-    public void createShape(ShapeType shaptype, List<Point> points) {
-        ShapeGeom shape = switch (shaptype) {
-            case NONE   -> null ;
-            case POLYGONE   -> null ;
+    public void createShape(ShapeType shapetype, List<Point> points) {
+        ShapeGeom shape = switch (shapetype) {
+            case NONE       -> null;
+            case POLYGONE   -> new Polygon(this, points);
             case RECTANGLE  -> new Square(this, points);
             case TRIANGLE   -> null;
-            case CIRCLE -> null ;
+            case CIRCLE     -> new Circle(this, points);
         };
         this.selectedShape = shape;
         update();
     }
 
 
-    public void addShape(ShapeType shaptype, List<Point> points) {
-        createShape(shaptype, points);
+    public void addShape(ShapeType shapetype, List<Point> points) {
+        createShape(shapetype, points);
         if (this.selectedShape != null)
             addShape(this.selectedShape);
         update();

@@ -45,7 +45,7 @@ public abstract class ShapeGeom extends Polygon {
 
     // ShapeGeom() {}
 
-    ShapeGeom(Mediator m, List<Point> points) {
+    public ShapeGeom(Mediator m, List<Point> points) {
         this.m = m;
         this.pointMemo = new ArrayList<Point>(points);
         this.displayMemo = false;

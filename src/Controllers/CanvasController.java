@@ -27,7 +27,7 @@ import java.util.Arrays;
 
 
 import Models.*;
-import Models.Square;
+import Models.Shapes.Square;
 import Models.ShapeGeom;
 import Models.ShapeType;
 
@@ -45,7 +45,10 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
 
     public void mouseMoved(MouseEvent e) {
         if (!this.finished) {
-            m.createShape(this.shapeType, Arrays.asList(points.get(0), e.getPoint()));
+            ArrayList<Point> tmp = new ArrayList<>(points);
+            tmp.add(e.getPoint());
+
+            m.createShape(this.shapeType, tmp);
         }
         if (this.curr != null) {
             this.curr.setLocation(e.getPoint());
@@ -66,7 +69,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     public void mousePressed(MouseEvent e) {
         if (!SwingUtilities.isLeftMouseButton(e))
             return;
-        if (finished && this.m.getSelectedShape() != null) {
+        if (finished && this.m.getSelectedShape() != null) { // Selection of a shape
             if (this.curr == null)
                 this.curr = this.m.memoIntersect(e);
             else
@@ -76,16 +79,31 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
             this.m.update();
             return;
         }
+
+        // Drawing of a shape
         this.points.add(new Point(e.getX(), e.getY()));
         this.finished = false;
-        if (this.shapeType != this.shapeType.NONE &&
-            this.points.size() == this.shapeType.getMaxMemoPoint()) {
+        System.out.println("New point " + e.getX() + ", " + e.getY());
+        if (this.shapeType != this.shapeType.NONE && figureDone(e)) {
+            System.out.println("figure terminée");
             // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
-            this.m.addShape(this.shapeType, Arrays.asList(points.get(0), points.get(1)));
+            this.m.addShape(this.shapeType, points);
             this.points.clear();
             this.finished = true;
             this.shapeType = ShapeType.NONE;
         }
+    }
+
+    public boolean figureDone(MouseEvent e) {
+        if (this.shapeType == ShapeType.POLYGONE) {
+            int margin = 5;
+            return (this.points.size() > 1 &&
+                    e.getX() >= (this.points.get(0).getX() - margin)  &&
+                    e.getX() <= (this.points.get(0).getX() + margin) &&
+                    e.getY() >= (this.points.get(0).getY()) - margin &&
+                    e.getY() <= (this.points.get(0).getY() + margin));
+        }
+        return (this.points.size() == this.shapeType.getMaxMemoPoint());
     }
 
     public Mediator getMediator() {
