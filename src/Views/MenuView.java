@@ -50,7 +50,7 @@ public class MenuView extends JPanel implements Observer {
 		this.add(toolsPanel);
 
 		JPanel colorsPanel = createColorPanel();
-		colorsPanel.setPreferredSize(new Dimension(198, 90));
+		colorsPanel.setPreferredSize(new Dimension(198, 110));
 		colorsPanel.setBorder(subMenuBorder);
 		this.add(colorsPanel);
 
@@ -128,12 +128,12 @@ public class MenuView extends JPanel implements Observer {
 		colorPanel.add(btn);
 
 		JLabel colorLbl = new JLabel("Selected color:", JLabel.LEFT);
-		colorLbl.setPreferredSize(new Dimension(100, 15));
+		colorLbl.setPreferredSize(new Dimension(198, 15));
 		colorLbl.setFont(new Font("Helvetica", Font.BOLD, 13));
 		colorPanel.add(colorLbl);
 
 		JPanel draw = new drawRect();
-		draw.setPreferredSize(new Dimension(70, 15));
+		draw.setPreferredSize(new Dimension(190, 15));
 		colorPanel.add(draw);
 
 		return colorPanel;
@@ -141,7 +141,7 @@ public class MenuView extends JPanel implements Observer {
 
 	public JLabel createSubMenuLabel(String txt) {
 		JLabel lbl = new JLabel(txt, JLabel.CENTER);
-		lbl.setPreferredSize(new Dimension(70, 20));
+		lbl.setPreferredSize(new Dimension(190, 20));
 		lbl.setFont(new Font("Helvetica", Font.BOLD, 15));
 
 		return lbl;
