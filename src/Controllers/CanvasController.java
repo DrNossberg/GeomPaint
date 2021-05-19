@@ -16,11 +16,14 @@ package Controllers;
 
 import javax.swing.*;
 import java.awt.*;
+// import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+
+import java.util.Arrays;
 
 
 import Models.*;
@@ -42,12 +45,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
 
     public void mouseMoved(MouseEvent e) {
         if (!this.finished) {
-            switch (shapeType) {
-                case POLYGONE: break;
-                case RECTANGLE: m.setSelectedShape(new Square(points.get(0), e.getPoint()));
-                case TRIANGLE:break;
-                case CIRCLE: break;
-            }
+            m.createShape(this.shapeType, Arrays.asList(points.get(0), e.getPoint()));
         }
         if (this.curr != null) {
             this.curr.setLocation(e.getPoint());
@@ -66,8 +64,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     }
 
     public void mousePressed(MouseEvent e) {
-        // if (!SwingUtilities.isLeftMouseButton(e) || !canDraw)
-        if (!SwingUtilities.isLeftMouseButton(e) || this.shapeType == ShapeType.NONE)
+        if (!SwingUtilities.isLeftMouseButton(e))
             return;
         if (finished && this.m.getSelectedShape() != null) {
             if (this.curr == null)
@@ -84,16 +81,10 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         if (this.shapeType != this.shapeType.NONE &&
             this.points.size() == this.shapeType.getMaxMemoPoint()) {
             // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
-            switch (shapeType) {
-                case POLYGONE: break;
-                case RECTANGLE: this.m.addShape(new Square(points.get(0), points.get(1)));
-                case TRIANGLE: break;
-                case CIRCLE: break;
-            }
+            this.m.addShape(this.shapeType, Arrays.asList(points.get(0), points.get(1)));
             this.points.clear();
             this.finished = true;
             this.shapeType = ShapeType.NONE;
-            // this.canDraw = false;
         }
     }
 
@@ -104,9 +95,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
 
     public void initiateShape(ShapeType type) {
         this.points.clear();
-        // this.finished = true;
         this.shapeType = type;
-
     }
 
 

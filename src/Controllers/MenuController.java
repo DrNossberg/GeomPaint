@@ -34,18 +34,10 @@ public class MenuController extends Observable implements ActionListener {
 
             }
             // Shapes buttons
-            case "draw_polygon" -> {
-                cc.initiateShape(ShapeType.POLYGONE);
-            }
-            case "draw_rectangle" -> {
-                cc.initiateShape(ShapeType.RECTANGLE);
-            }
-            case "draw_triangle" -> {
-                cc.initiateShape(ShapeType.TRIANGLE);
-            }
-            case "draw_circle" -> {
-                cc.initiateShape(ShapeType.CIRCLE);
-            }
+            case "polygon_icon" ->  { cc.initiateShape(ShapeType.POLYGONE); }
+            case "rectangle_icon"-> { cc.initiateShape(ShapeType.RECTANGLE);}
+            case "triangle_icon"->  { cc.initiateShape(ShapeType.TRIANGLE); }
+            case "circle_icon"  ->  { cc.initiateShape(ShapeType.CIRCLE);   }
 
             // Edit buttons
             case "fill_shape" ->{
@@ -66,7 +58,7 @@ public class MenuController extends Observable implements ActionListener {
 //            	getGraphics().clearReact(0, 0, getWidht(), getHeight());
 //            	clear();
             }
-            
+
         }
     }
 

@@ -2,6 +2,7 @@ package Views;
 
 import App.GeomPain;
 import Controllers.MenuController;
+import Models.Mediator;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,8 +22,10 @@ import javax.swing.border.EtchedBorder;
 @SuppressWarnings("deprecation")
 public class MenuView extends JPanel implements Observer {
 	private MenuController mc;
+	private Mediator m;
 
-	public MenuView(MenuController mc){
+	public MenuView(Mediator m, MenuController mc) {
+		this.m = m;
 		this.mc = mc;
 		mc.addObserver(this);
 
@@ -62,9 +65,9 @@ public class MenuView extends JPanel implements Observer {
 
 		try {
 			tmp.setName(asset_name);
-			tmp.setIcon(new ImageIcon(ImageIO.read(GeomPain.ASSERT_LOADER.getAsset(asset_name))));
+			tmp.setIcon(new ImageIcon((Image) this.m.getResource(asset_name)));
 		} catch (Exception e) {
-			GeomPain.ASSERT_LOADER.printError(asset_name);
+			System.out.println("Error: " + asset_name + ": " + e.getStackTrace().toString());
 		}
 		return (tmp);
 	}

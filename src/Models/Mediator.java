@@ -1,6 +1,7 @@
 package Models;
 
 import java.awt.*;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.awt.Rectangle;
@@ -14,30 +15,49 @@ public class Mediator extends Observable {
         on verra pour une Factory, cas échéant une classe dédiée
     */
 
+    private AssetLoader loader;
     private ShapeGeom selectedShape;
     private final ArrayList<ShapeGeom> shapes;
 
-    public Mediator() {
+    public Mediator(AssetLoader loader) {
+        this.loader = loader;
         this.selectedShape = null;
         this.shapes = new ArrayList<>();
     }
 
-    public void setSelectedShape(ShapeGeom shape) {
-        this.selectedShape = shape;
-        update();
-    }
+
+    // public void setSelectedShape(ShapeGeom shape) {
+    //     this.selectedShape = shape;
+    //     update();
+    // }
 
     public void update() {
         setChanged();
         notifyObservers();
     }
 
-    public ShapeGeom getSelectedShape() {
-        return (this.selectedShape);
+    public void createShape(ShapeType shaptype, List<Point> points) {
+        ShapeGeom shape = switch (shaptype) {
+            case NONE   -> null ;
+            case POLYGONE   -> null ;
+            case RECTANGLE  -> new Square(this, points);
+            case TRIANGLE   -> null;
+            case CIRCLE -> null ;
+        };
+        this.selectedShape = shape;
+        update();
     }
 
-    public void addShape() {
-        this.addShape(this.selectedShape);
+
+    public void addShape(ShapeType shaptype, List<Point> points) {
+        createShape(shaptype, points);
+        if (this.selectedShape != null)
+            addShape(this.selectedShape);
+        update();
+    }
+
+    public ShapeGeom getSelectedShape() {
+        return (this.selectedShape);
     }
 
     public void addShape(ShapeGeom shape) {
@@ -84,5 +104,9 @@ public class Mediator extends Observable {
         }
         for (ShapeGeom shape : this.shapes)
             shape.draw(g);
+    }
+
+    public Object getResource(String resource) {
+        return (this.loader.get(resource));
     }
 }
