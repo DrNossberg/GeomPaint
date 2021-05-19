@@ -19,6 +19,7 @@ public class CanvasView extends JPanel implements Observer {
         this.mc = mc;
         this.addMouseListener(cc);
         mc.addObserver(this);
+        this.cc.getMediator().addObserver(this);
     }
 
     @Override

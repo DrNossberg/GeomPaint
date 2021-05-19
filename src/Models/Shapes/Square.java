@@ -71,6 +71,7 @@ public class Square extends ShapeGeom {
 
     public boolean intersects(Rectangle r) {
         //possibility to overload contain here
+        System.out.println("here");
         return (this.rect.intersects(r) && !this.rect.contains(r));
     }
 

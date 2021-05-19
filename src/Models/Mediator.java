@@ -64,6 +64,7 @@ public class Mediator extends Observable {
     public void removeShape() {
         if (this.selectedShape != null) {
             this.shapes.remove(this.selectedShape);
+            this.selectedShape = null;
             update();
         }
     }
@@ -100,13 +101,13 @@ public class Mediator extends Observable {
     }
 
     public void draw(Graphics g) {
-        if (this.selectedShape != null) {
-            this.selectedShape.drawMemo(g);
-            this.selectedShape.draw(g);
-        }
-
         for (int i = this.shapes.size()-1; i >= 0; i--)
             shapes.get(i).draw(g);
+
+        if (this.selectedShape != null) {
+            this.selectedShape.draw(g);
+            this.selectedShape.drawMemo(g);
+        }
     }
 
     public Object getResource(String resource) {

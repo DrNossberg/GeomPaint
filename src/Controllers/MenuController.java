@@ -21,13 +21,10 @@ public class MenuController extends Observable implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String btnText = ((JButton) e.getSource()).getName();
 
-        System.out.println(btnText);
         switch (btnText) {
             case "pick_color" -> {
                 JColorChooser colorChooser = new JColorChooser();
                 this.selectedColor = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
-
-                System.out.println("Choosen color: " + this.selectedColor);
 
                 setChanged();
                 notifyObservers();
@@ -41,9 +38,8 @@ public class MenuController extends Observable implements ActionListener {
 
             // Edit buttons
             case "fill_shape" ->{
-            	if (this.selectedColor != null) {
+            	if (this.selectedColor != null && this.cc.getMediator().getSelectedShape() != null) {
             	    this.cc.getMediator().getSelectedShape().setColor(this.selectedColor);
-                    System.out.println("changing color");
             	    setChanged();
                     notifyObservers();
                 }

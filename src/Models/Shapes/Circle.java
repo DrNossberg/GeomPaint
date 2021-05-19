@@ -37,8 +37,6 @@ public class Circle extends ShapeGeom {
                 (int) (super.pointMemo.get(0).getX() - radius),
                 (int) (super.pointMemo.get(0).getY() - radius));
 
-        System.out.println(topLeft.getX() + " " + topLeft.getY());
-
         g.drawOval((int) topLeft.getX(), (int) topLeft.getY(), 2 * radius,  2 * radius);
 
         if (color != null) {

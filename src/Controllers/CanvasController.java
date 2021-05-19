@@ -83,9 +83,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         // Drawing of a shape
         this.points.add(new Point(e.getX(), e.getY()));
         this.finished = false;
-        System.out.println("New point " + e.getX() + ", " + e.getY());
         if (this.shapeType != this.shapeType.NONE && figureDone(e)) {
-            System.out.println("figure terminée");
             // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
             this.m.addShape(this.shapeType, points);
             this.points.clear();
