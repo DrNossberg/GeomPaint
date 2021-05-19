@@ -12,7 +12,7 @@ import java.util.Observable;
 public class MenuController extends Observable implements ActionListener {
     private CanvasController cc;
     Color selectedColor = Color.BLACK;
-    Color borderColor = Color.YELLOW;
+    Color borderColor = selectedColor;
 
     public MenuController(CanvasController cc) {
         this.cc = cc;
