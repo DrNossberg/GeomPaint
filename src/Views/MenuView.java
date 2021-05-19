@@ -45,7 +45,7 @@ public class MenuView extends JPanel implements Observer {
 		this.add(shapesPanel);
 
 		JPanel toolsPanel = createToolsPanel();
-		toolsPanel.setPreferredSize(new Dimension(198, 210));
+		toolsPanel.setPreferredSize(new Dimension(198, 240));
 		toolsPanel.setBorder(subMenuBorder);
 		this.add(toolsPanel);
 
@@ -162,5 +162,13 @@ public class MenuView extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
+
+	public class drawRect extends JPanel {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(mc.getSelectedColor());
+        g.fillRect(0, 0, 70, 50);
+    }
+}
 
 }

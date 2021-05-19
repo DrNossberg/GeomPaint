@@ -12,7 +12,7 @@ import java.util.Observable;
 public class MenuController extends Observable implements ActionListener {
     private CanvasController cc;
     Color selectedColor = Color.BLACK;
-    Color borderColor = selectedColor;
+   
 
     public MenuController(CanvasController cc) {
         this.cc = cc;
@@ -44,8 +44,8 @@ public class MenuController extends Observable implements ActionListener {
             }
 
             case "fill_border" ->{
-                if (this.borderColor != null && this.cc.getMediator().getSelectedShape() != null) {
-                    this.cc.getMediator().getSelectedShape().setColor(this.borderColor);
+                if (this.selectedColor != null && this.cc.getMediator().getSelectedShape() != null) {
+                    this.cc.getMediator().getSelectedShape().setBorderColor(this.selectedColor);
                     update();
                 }
             }
