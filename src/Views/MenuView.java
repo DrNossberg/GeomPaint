@@ -160,11 +160,4 @@ public class MenuView extends JPanel implements Observer {
 		repaint();
 	}
 
-	public class drawRect extends JPanel {
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.setColor(mc.getSelectedColor());
-			g.fillRect(0, 0, 70, 50);
-		}
-	}
 }
