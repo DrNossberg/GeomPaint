@@ -10,26 +10,15 @@ import java.awt.event.MouseEvent;
 
 @SuppressWarnings("deprecation")
 public class Mediator extends Observable { 
-    /* DEV : 
-        le role du Mediator n'est pas de créer des shapes !
-        on verra pour une Factory, cas échéant une classe dédiée
-    */
-
-    private AssetLoader loader;
-    private ShapeGeom selectedShape;
     private final ArrayList<ShapeGeom> shapes;
+    private ShapeGeom selectedShape;
+    private AssetLoader loader;
 
     public Mediator(AssetLoader loader) {
         this.loader = loader;
         this.selectedShape = null;
         this.shapes = new ArrayList<>();
     }
-
-
-    // public void setSelectedShape(ShapeGeom shape) {
-    //     this.selectedShape = shape;
-    //     update();
-    // }
 
     public void update() {
         setChanged();
@@ -47,7 +36,6 @@ public class Mediator extends Observable {
         this.selectedShape = shape;
         update();
     }
-
 
     public void addShape(ShapeType shaptype, List<Point> points) {
         createShape(shaptype, points);
