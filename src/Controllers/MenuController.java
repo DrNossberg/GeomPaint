@@ -41,6 +41,13 @@ public class MenuController extends Observable implements ActionListener {
             	    update();
                 }
             }
+
+            case "fill_border" ->{
+                if (this.borderColor != null && this.cc.getMediator().getSelectedShape() != null) {
+                    this.cc.getMediator().getSelectedShape().setColor(this.borderColor);
+                    update();
+                }
+            }
             case "erase_shape"      -> this.cc.getMediator().removeShape();
             case "bring_forward"    -> this.cc.getMediator().bringForward();
            case "send_backward"     -> this.cc.getMediator().sendBackward();

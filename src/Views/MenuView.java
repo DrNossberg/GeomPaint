@@ -96,17 +96,20 @@ public class MenuView extends JPanel implements Observer {
 		JPanel toolsPanel = new JPanel();
 
 		toolsPanel.add(createSubMenuLabel("Edit"));
-		JButton[] toolButtons = new JButton[5];
+		JButton[] toolButtons = new JButton[6];
 		toolButtons[0] = new JButton("Fill shape");
 		toolButtons[0].setName("fill_shape");
-		toolButtons[1] = new JButton("Erase shape");
-		toolButtons[1].setName("erase_shape");
-		toolButtons[2] = new JButton("Bring forward");
-		toolButtons[2].setName("bring_forward");
-		toolButtons[3] = new JButton("Send backward");
-		toolButtons[3].setName("send_backward");
-		toolButtons[4] = new JButton("Erase all");
-		toolButtons[4].setName("erase_all");
+		toolButtons[1] = new JButton("Fill border");
+		toolButtons[1].setName("fill_border");
+		toolButtons[2] = new JButton("Erase shape");
+		toolButtons[2].setName("erase_shape");
+		toolButtons[3] = new JButton("Bring forward");
+		toolButtons[3].setName("bring_forward");
+		toolButtons[4] = new JButton("Send backward");
+		toolButtons[4].setName("send_backward");
+		toolButtons[5] = new JButton("Erase all");
+		toolButtons[5].setName("erase_all");
+		
 
 
 		for (JButton btn : toolButtons) {
