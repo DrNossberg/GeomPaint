@@ -40,6 +40,11 @@ public class Circle extends ShapeGeom {
         System.out.println(topLeft.getX() + " " + topLeft.getY());
 
         g.drawOval((int) topLeft.getX(), (int) topLeft.getY(), 2 * radius,  2 * radius);
+
+        if (color != null) {
+            g.setColor(this.color);
+            g.fillOval((int) topLeft.getX() + 1, (int) topLeft.getY() + 1, 2 * (radius - 1), 2 * (radius - 1));
+        }
     }
 
     @Override

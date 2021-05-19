@@ -33,6 +33,20 @@ public class Polygon extends ShapeGeom {
         g.setColor(this.borderColor);
         g.drawPolygon(super.xpoints, super.ypoints, this.pointMemo.size());
 
+        if (this.color != null) {
+            g.setColor(this.color);
+
+            int[] xpointsInt = new int[super.xpoints.length];
+            int[] ypointsInt = new int[super.ypoints.length];
+
+            for (int i = 0; i < super.xpoints.length; i++) {
+                xpointsInt[i] = super.xpoints[i] + 1;
+                ypointsInt[i] = super.ypoints[i] + 1;
+            }
+
+            g.fillPolygon(xpointsInt, ypointsInt, this.pointMemo.size());
+        }
+
     }
 
     @Override

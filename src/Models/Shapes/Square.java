@@ -61,6 +61,12 @@ public class Square extends ShapeGeom {
         g.setColor(this.borderColor);
         g.drawRect((int) this.rect.getX(), (int) this.rect.getY(),
             (int) this.rect.getWidth(), (int) this.rect.getHeight());
+
+        if (this.color != null) {
+            g.setColor(this.color);
+            g.fillRect((int) this.rect.getX() + 1, (int) this.rect.getY() + 1,
+                    (int) this.rect.getWidth() - 1, (int) this.rect.getHeight() - 1);
+        }
     }
 
     public boolean intersects(Rectangle r) {

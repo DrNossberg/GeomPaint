@@ -43,6 +43,9 @@ public class MenuController extends Observable implements ActionListener {
             case "fill_shape" ->{
             	if (this.selectedColor != null) {
             	    this.cc.getMediator().getSelectedShape().setColor(this.selectedColor);
+                    System.out.println("changing color");
+            	    setChanged();
+                    notifyObservers();
                 }
             }
             case "erase_shape" ->{

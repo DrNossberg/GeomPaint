@@ -26,7 +26,7 @@ public class GeomPain {
         MenuController mc = new MenuController(cc);
 
         // Link controller to view
-        CanvasView cv = new CanvasView(cc);
+        CanvasView cv = new CanvasView(cc, mc);
         MenuView mv = new MenuView(mediator, mc);
 
         // Add view observer to the model
