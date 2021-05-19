@@ -15,22 +15,22 @@ import javax.swing.JFrame;
 import java.awt.*;
 
 public class GeomPain {
-    public static final AssetLoader ASSERT_LOADER = new AssetLoader("./src");
 
     public static void main(String[] args) {
 
-        Mediator m = new Mediator();
+        AssetLoader loader = new AssetLoader("./src/resources");
+        Mediator mediator = new Mediator(loader);
 
         // Link model to controller
-        CanvasController cc = new CanvasController(m);
+        CanvasController cc = new CanvasController(mediator);
         MenuController mc = new MenuController(cc);
 
         // Link controller to view
         CanvasView cv = new CanvasView(cc);
-        MenuView mv = new MenuView(mc);
+        MenuView mv = new MenuView(mediator, mc);
 
         // Add view observer to the model
-        m.addObserver(cv);
+        mediator.addObserver(cv);
 
         JFrame frame = new JFrame("Our super rectangle!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

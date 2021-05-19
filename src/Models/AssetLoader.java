@@ -1,25 +1,37 @@
 package Models;
 
+import java.util.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.FileReader;
-import java.net.URL;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Scanner;
-
-import javax.swing.ImageIcon;
+import java.util.stream.Collectors;
+import java.net.URISyntaxException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import javax.imageio.ImageIO;
 
 /**
  * AssetLoader
  */
-public class AssetLoader {
-    private HashMap<String, URL> assets = new HashMap<>();
 
+public class AssetLoader {
+    private HashMap<String, Object> assets = new HashMap<>();
+    private File dir;
 
     public AssetLoader(String dirName) {
-        File dir = new File(dirName);
-        loadAssets(dir);
+        this.dir = new File(dirName);
+        try {
+            loadAssetsInDirectory();
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -28,18 +40,18 @@ public class AssetLoader {
      * In case there is such a method, load the asset in the assets map
      * @param dir
      */
-    private void loadAssets(File dir) {
-        if (dir.isDirectory()) {
-            File[] files = dir.listFiles();
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    loadAssets(file);
-                }
-                else if (!file.getName().equals("AssetLoader.java")) {
-                    this.searchForAsset(file);
-                }
-            }
-        }
+    private void loadAssetsInDirectory() throws URISyntaxException, IOException {
+        URI resource;
+
+        if (!this.dir.isDirectory()) //trow error ?
+            return;
+        resource = getClass().getClassLoader().getResource(this.dir.getName()).toURI();
+        List<File> collect = Files.walk(Paths.get(resource))
+                .filter(Files::isRegularFile)
+                .map(x -> x.toFile())
+                .collect(Collectors.toList());
+        for (File file : collect)
+            this.assets.put(file.getName().replaceFirst("[.^][^.]+$", ""), loadAsset(file));
     }
 
 
@@ -47,26 +59,14 @@ public class AssetLoader {
      * Read through the whole file to find call of asset
      * @param file
      */
-    private void searchForAsset(File file) {
-        try {
-            Scanner sc = new Scanner(file);
-            String toFind = "getAsset(\"";
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                if (line.contains(toFind)) {
-                    String resourceName = line.substring(line.lastIndexOf(toFind) + toFind.length(), line.indexOf("\")"));
-                    if (!this.assets.containsKey(resourceName))
-                        this.assets.put(resourceName, this.getClass().getResource("../resources/" + resourceName + ".png"));
-                }
-            }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    private Object loadAsset(File file) throws IOException  {
+        if (file.getName().replaceFirst(".+[.]", "").equals("png"))
+            return (ImageIO.read(file));
+        return (file);
     }
 
-    public URL getAsset(String name) {
-        return this.assets.get(name);
+    public Object get(String name) {
+        return (this.assets.get(name));
     }
 
     public void printError(String name) {
