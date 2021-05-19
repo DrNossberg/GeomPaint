@@ -3,6 +3,7 @@ package Models;
 import Models.Shapes.Circle;
 import Models.Shapes.Polygon;
 import Models.Shapes.Square;
+import Models.Shapes.Triangle;
 
 import java.awt.*;
 import java.util.List;
@@ -34,7 +35,7 @@ public class Mediator extends Observable {
             case NONE       -> null;
             case POLYGONE   -> new Polygon(this, points);
             case RECTANGLE  -> new Square(this, points);
-            case TRIANGLE   -> null;
+            case TRIANGLE   -> new Triangle(this, points);
             case CIRCLE     -> new Circle(this, points);
         };
         this.selectedShape = shape;
