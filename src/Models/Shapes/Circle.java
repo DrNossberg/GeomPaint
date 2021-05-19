@@ -11,14 +11,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Circle extends ShapeGeom {
-    public Circle(Mediator m, List<Point> points) {
-        this(m, points.get(0), points.get(1));
-    }
 
-    public Circle(Mediator m, Point center, Point a) {
+    public Circle(Mediator m, List<Point> points) {
         super(m, new ArrayList<>());
-        this.pointMemo.add(center);
-        this.pointMemo.add(a);
+        this.pointMemo.add(points.get(0));
+        if (points.size() > 1)
+            this.pointMemo.add(points.get(1));
+        else
+            this.pointMemo.add(points.get(0));
         this.showedMemo = Arrays.asList(true, true);
 
         updateShape();
