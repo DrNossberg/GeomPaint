@@ -95,6 +95,7 @@ public abstract class ShapeGeom extends Polygon {
     }
 
     public abstract void draw(Graphics g);
+
     public void drawMemo(Graphics g) {
         int w = this.memoImage.getWidth(null);
         int h = this.memoImage.getHeight(null);
@@ -104,8 +105,6 @@ public abstract class ShapeGeom extends Polygon {
                 mp.x - (w / 2),
                 mp.y - (h / 2), null);
         }
-
-
     }
     public abstract boolean intersects(Rectangle r);
 }

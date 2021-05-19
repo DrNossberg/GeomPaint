@@ -13,11 +13,10 @@ public class Square extends ShapeGeom {
     protected final Rectangle rect;
 
     public Square(Mediator m, List<Point> points) {
-        this(m, points.get(0), points.get(1));
-    }
-
-    public Square(Mediator m, Point a, Point b) {
+        // this(m, points.get(0), points.get(1));
         super(m, new ArrayList<Point>());
+        Point a = points.get(0);
+        Point b = (points.size() > 1) ? points.get(1) : a;
         Point topLeft  = new Point( (int) Math.min(a.getX(), b.getX()),
                                     (int) Math.min(a.getY(), b.getY()));
         Point downRight = new Point((int) Math.max(a.getX(), b.getX()),
@@ -71,7 +70,6 @@ public class Square extends ShapeGeom {
 
     public boolean intersects(Rectangle r) {
         //possibility to overload contain here
-        System.out.println("here");
         return (this.rect.intersects(r) && !this.rect.contains(r));
     }
 
