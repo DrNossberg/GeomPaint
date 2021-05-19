@@ -51,7 +51,7 @@ public class MenuController extends Observable implements ActionListener {
             }
             case "erase_shape"      -> this.cc.getMediator().removeShape();
             case "bring_forward"    -> this.cc.getMediator().bringForward();
-           case "send_backward"     -> this.cc.getMediator().sendBackward();
+            case "send_backward"     -> this.cc.getMediator().sendBackward();
             case "erase_all"        -> this.cc.getMediator().removeAll();
 
         }
