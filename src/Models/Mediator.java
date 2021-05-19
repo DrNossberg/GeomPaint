@@ -103,6 +103,7 @@ public class Mediator extends Observable {
                 return (true);
             }
         }
+        this.selectedShape = null;
         return (false);
     }
 

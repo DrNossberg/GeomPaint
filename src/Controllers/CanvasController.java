@@ -47,7 +47,6 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         if (!this.finished) {
             ArrayList<Point> tmp = new ArrayList<>(points);
             tmp.add(e.getPoint());
-
             m.createShape(this.shapeType, tmp);
         }
         if (this.curr != null) {
@@ -69,26 +68,23 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     public void mousePressed(MouseEvent e) {
         if (!SwingUtilities.isLeftMouseButton(e))
             return;
-        if (finished && this.m.getSelectedShape() != null) { // Selection of a shape
-            if (this.curr == null)
-                this.curr = this.m.memoIntersect(e);
-            else
+        if (finished) { // Selection of a shape
+            if (this.m.shapeIntersect(e)) {
+                this.curr = (this.curr == null) ? this.m.memoIntersect(e) : null;
+            } else
                 this.curr = null;
-        }
-        if (finished && this.m.shapeIntersect(e)) {
             this.m.update();
-            return;
         }
 
         // Drawing of a shape
-        this.points.add(new Point(e.getX(), e.getY()));
-        this.finished = false;
+        if (!this.finished)
+            this.points.add(new Point(e.getX(), e.getY()));
         if (this.shapeType != this.shapeType.NONE && figureDone(e)) {
             // System.out.println("Points ! : " + points.get(0) + " , " + points.get(1));
             this.m.addShape(this.shapeType, points);
-            this.points.clear();
-            this.finished = true;
             this.shapeType = ShapeType.NONE;
+            this.finished = true;
+            this.points.clear();
         }
     }
 
@@ -108,10 +104,10 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         return (this.m);
     }
 
-
     public void initiateShape(ShapeType type) {
-        this.points.clear();
         this.shapeType = type;
+        this.points.clear();
+        this.finished = false;
     }
 
 
