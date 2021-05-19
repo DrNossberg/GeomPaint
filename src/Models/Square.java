@@ -4,18 +4,17 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import java.lang.Math;
 
 public class Square extends ShapeGeom {
     protected final Rectangle rect;
 
-    public Square(ArrayList<Point> points) {
-        this(points.get(0), points.get(1));
+    public Square(Mediator m, List<Point> points) {
+        this(m, points.get(0), points.get(1));
     }
 
-    public Square(Point a, Point b) {
-        super(new ArrayList<Point>());
+    public Square(Mediator m, Point a, Point b) {
+        super(m, new ArrayList<Point>());
         Point topLeft  = new Point( (int) Math.min(a.getX(), b.getX()),
                                     (int) Math.min(a.getY(), b.getY()));
         Point downRight = new Point((int) Math.max(a.getX(), b.getX()),

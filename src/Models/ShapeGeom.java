@@ -13,24 +13,26 @@
 
 package Models;
 
-
-import App.GeomPain;
-
 import java.awt.*;
 import java.io.File;
+import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observable;
 import java.awt.Polygon;
 import java.util.List;
-
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
+import App.GeomPain;
+
+import Models.Mediator;
 
 @SuppressWarnings("deprecation")
 public abstract class ShapeGeom extends Polygon {
+    private Mediator m;
     protected Color borderColor = Color.black;
     protected Color color;
     protected int thickness;
@@ -41,15 +43,16 @@ public abstract class ShapeGeom extends Polygon {
     protected int maxMemoPoint;
     protected int selectedMemo;
 
-    ShapeGeom() {}
+    // ShapeGeom() {}
 
-    ShapeGeom(ArrayList<Point> points) {
-        this.pointMemo = points;
+    ShapeGeom(Mediator m, List<Point> points) {
+        this.m = m;
+        this.pointMemo = new ArrayList<Point>(points);
         this.displayMemo = false;
         try {
-            memoImage = ImageIO.read(GeomPain.ASSERT_LOADER.getAsset("memoPoint"));
+            memoImage = (Image) m.getResource("memoPoint");
         } catch (Exception e) {
-            GeomPain.ASSERT_LOADER.printError("memoPoint");
+            System.out.println("error" + "memoPoint");
         }
         this.selectedMemo = -1;
     }
