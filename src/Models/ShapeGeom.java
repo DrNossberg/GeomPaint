@@ -27,7 +27,6 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 import App.GeomPain;
-
 import Models.Mediator;
 
 @SuppressWarnings("deprecation")
@@ -42,8 +41,6 @@ public abstract class ShapeGeom extends Polygon {
     protected Image memoImage;
     protected int maxMemoPoint;
     protected int selectedMemo;
-
-    // ShapeGeom() {}
 
     public ShapeGeom(Mediator m, List<Point> points) {
         this.m = m;
@@ -73,10 +70,6 @@ public abstract class ShapeGeom extends Polygon {
     public void setSelectedMemo(int index) {
         this.selectedMemo = index;
     }
-
-    // public void displayMemoPoints() {
-        // getSaisiePoint()
-    // }
 
     public abstract void updateShape();
 

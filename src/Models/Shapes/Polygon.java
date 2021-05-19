@@ -15,17 +15,18 @@ public class Polygon extends ShapeGeom {
         this.showedMemo = new ArrayList<>();
         for (Point p: points)
             this.showedMemo.add(true);
-        this.showedMemo.set(this.showedMemo.size()-1, false);
+        this.showedMemo.set(this.showedMemo.size() - 1, false);
         super.xpoints = new int[this.pointMemo.size()];
         super.ypoints = new int[this.pointMemo.size()];
-        for (int i = 0; i < this.pointMemo.size(); i++) {
-            super.xpoints[i] = (int) this.pointMemo.get(i).getX();
-            super.ypoints[i] = (int) this.pointMemo.get(i).getY();
-        }
     }
 
     @Override
     public void updateShape() {
+        for (int i = 0; i < this.pointMemo.size(); i++) {
+            super.xpoints[i] = (int) this.pointMemo.get(i).getX();
+            super.ypoints[i] = (int) this.pointMemo.get(i).getY();
+            super.addPoint(super.xpoints[i], super.ypoints[i]);
+        }
     }
 
     @Override
@@ -51,6 +52,7 @@ public class Polygon extends ShapeGeom {
 
     @Override
     public boolean intersects(Rectangle r) {
-        return (super.intersects((Rectangle2D) r) && super.contains(r));
+        System.out.println(super.getBounds());
+        return (super.intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight()));
     }
 }
