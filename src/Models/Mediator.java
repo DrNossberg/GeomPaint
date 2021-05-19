@@ -35,7 +35,7 @@ public class Mediator extends Observable {
             case POLYGONE   -> new Polygon(this, points);
             case RECTANGLE  -> new Square(this, points);
             case TRIANGLE   -> null;
-            case CIRCLE -> null ;
+            case CIRCLE     -> new Circle(this, points);
         };
         this.selectedShape = shape;
         update();
