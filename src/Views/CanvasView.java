@@ -29,8 +29,6 @@ public class CanvasView extends JPanel implements Observer {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        g.setColor(mc.getSelectedColor());
         this.cc.getMediator().draw(g);
     }
 }

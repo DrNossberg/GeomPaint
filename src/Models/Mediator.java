@@ -29,21 +29,21 @@ public class Mediator extends Observable {
         notifyObservers();
     }
 
-    public void createShape(ShapeType shapetype, List<Point> points) {
+    public void createShape(ShapeType shapetype, List<Point> points, Color color) {
         ShapeGeom shape = switch (shapetype) {
             case NONE       -> null;
-            case POLYGONE   -> new Polygon(this, points);
-            case RECTANGLE  -> new Square(this, points);
-            case TRIANGLE   -> new Triangle(this, points);
-            case CIRCLE     -> new Circle(this, points);
+            case POLYGONE   -> new Polygon(this, points, color);
+            case RECTANGLE  -> new Square(this, points, color);
+            case TRIANGLE   -> new Triangle(this, points, color);
+            case CIRCLE     -> new Circle(this, points, color);
         };
         this.selectedShape = shape;
         update();
     }
 
 
-    public void addShape(ShapeType shapetype, List<Point> points) {
-        createShape(shapetype, points);
+    public void addShape(ShapeType shapetype, List<Point> points, Color c) {
+        createShape(shapetype, points, c);
         if (this.selectedShape != null)
             addShape(this.selectedShape);
         update();
