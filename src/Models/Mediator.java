@@ -6,12 +6,10 @@ import Models.Shapes.Square;
 import Models.Shapes.Triangle;
 
 import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Observable;
+import java.util.*;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 
 @SuppressWarnings("deprecation")
@@ -68,6 +66,33 @@ public class Mediator extends Observable {
             update();
         }
     }
+
+    public void removeAll() {
+        this.shapes.clear();
+        this.selectedShape = null;
+        update();
+    }
+
+    public void bringForward() {
+        if (this.selectedShape != null && (this.shapes.indexOf(this.selectedShape) > 0)) {
+            Collections.swap(
+                    this.shapes,
+                    this.shapes.indexOf(this.selectedShape),
+                    this.shapes.indexOf(this.selectedShape) - 1);
+            update();
+        }
+    }
+
+    public void sendBackward() {
+        if (this.selectedShape != null && (this.shapes.indexOf(this.selectedShape) < this.shapes.size() - 1)) {
+            Collections.swap(
+                    this.shapes,
+                    this.shapes.indexOf(this.selectedShape),
+                    this.shapes.indexOf(this.selectedShape) + 1);
+            update();
+        }
+    }
+
 
     public boolean shapeIntersect(MouseEvent e) {
         Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 30, 30);

@@ -26,8 +26,7 @@ public class MenuController extends Observable implements ActionListener {
                 JColorChooser colorChooser = new JColorChooser();
                 this.selectedColor = JColorChooser.showDialog(null, "Pick a color", Color.black); // color variable stocke la couleur sélectionnée avec "ok"
 
-                setChanged();
-                notifyObservers();
+                update();
 
             }
             // Shapes buttons
@@ -40,25 +39,28 @@ public class MenuController extends Observable implements ActionListener {
             case "fill_shape" ->{
             	if (this.selectedColor != null && this.cc.getMediator().getSelectedShape() != null) {
             	    this.cc.getMediator().getSelectedShape().setColor(this.selectedColor);
-            	    setChanged();
-                    notifyObservers();
+                update();
                 }
             }
             case "erase_shape" ->{
             	this.cc.getMediator().removeShape();
             }
             case "bring_forward" ->{
-//            	forwardFigure();
+                this.cc.getMediator().bringForward();
             }
            case "send_backward" ->{
-//            	backwardFigure();
+                this.cc.getMediator().sendBackward();
             }
             case "erase_all" ->{
-//            	getGraphics().clearReact(0, 0, getWidht(), getHeight());
-//            	clear();
+                this.cc.getMediator().removeAll();
             }
 
         }
+    }
+
+    private void update() {
+        setChanged();
+        notifyObservers();
     }
 
     public Color getSelectedColor() {
