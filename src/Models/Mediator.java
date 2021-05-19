@@ -61,6 +61,13 @@ public class Mediator extends Observable {
         update();
     }
 
+    public void removeShape() {
+        if (this.selectedShape != null) {
+            this.shapes.remove(this.selectedShape);
+            update();
+        }
+    }
+
     public boolean shapeIntersect(MouseEvent e) {
         Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 30, 30);
 

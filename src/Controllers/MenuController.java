@@ -49,7 +49,7 @@ public class MenuController extends Observable implements ActionListener {
                 }
             }
             case "erase_shape" ->{
-//            	clearFigure();
+            	this.cc.getMediator().removeShape();
             }
             case "bring_forward" ->{
 //            	forwardFigure();
