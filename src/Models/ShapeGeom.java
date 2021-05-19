@@ -13,20 +13,26 @@
 
 package Models;
 
-
 import java.awt.*;
+import java.io.File;
+import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Observable;
 import java.awt.Polygon;
 import java.util.List;
-
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
+import App.GeomPain;
+
+import Models.Mediator;
 
 @SuppressWarnings("deprecation")
 public abstract class ShapeGeom extends Polygon {
+    private Mediator m;
     protected Color borderColor = Color.black;
     protected Color color;
     protected int thickness;
@@ -35,17 +41,20 @@ public abstract class ShapeGeom extends Polygon {
     protected boolean displayMemo;
     protected Image memoImage;
     protected int maxMemoPoint;
+    protected int selectedMemo;
 
-    ShapeGeom() {}
+    // ShapeGeom() {}
 
-    ShapeGeom(ArrayList<Point> points) {
-        this.pointMemo = points;
+    public ShapeGeom(Mediator m, List<Point> points) {
+        this.m = m;
+        this.pointMemo = new ArrayList<Point>(points);
         this.displayMemo = false;
         try {
-            memoImage = ImageIO.read(this.getClass().getResource("../resources/memoPoint.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            memoImage = (Image) m.getResource("memoPoint");
+        } catch (Exception e) {
+            System.out.println("error" + "memoPoint");
         }
+        this.selectedMemo = -1;
     }
 
     public void translate(int offset_x, int offest_y) {
@@ -61,7 +70,9 @@ public abstract class ShapeGeom extends Polygon {
         this.borderColor = c;
     }
 
-
+    public void setSelectedMemo(int index) {
+        this.selectedMemo = index;
+    }
 
     // public void displayMemoPoints() {
         // getSaisiePoint()
@@ -84,6 +95,7 @@ public abstract class ShapeGeom extends Polygon {
     }
 
     public abstract void draw(Graphics g);
+
     public void drawMemo(Graphics g) {
         int w = this.memoImage.getWidth(null);
         int h = this.memoImage.getHeight(null);
@@ -93,8 +105,6 @@ public abstract class ShapeGeom extends Polygon {
                 mp.x - (w / 2),
                 mp.y - (h / 2), null);
         }
-
-
     }
     public abstract boolean intersects(Rectangle r);
 }

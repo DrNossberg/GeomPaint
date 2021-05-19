@@ -1,22 +1,33 @@
 package Views;
 
+import App.GeomPain;
 import Controllers.MenuController;
+import Models.Mediator;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-public class MenuView extends JPanel{
+@SuppressWarnings("deprecation")
+public class MenuView extends JPanel implements Observer {
 	private MenuController mc;
+	private Mediator m;
 
-	public MenuView(MenuController mc){
+	public MenuView(Mediator m, MenuController mc) {
+		this.m = m;
 		this.mc = mc;
+		mc.addObserver(this);
 
 		Border panelBorder = BorderFactory.createLineBorder(Color.black);
 		this.setBorder(panelBorder);
@@ -39,31 +50,37 @@ public class MenuView extends JPanel{
 		this.add(toolsPanel);
 
 		JPanel colorsPanel = createColorPanel();
-		colorsPanel.setPreferredSize(new Dimension(198, 70));
+		colorsPanel.setPreferredSize(new Dimension(198, 110));
 		colorsPanel.setBorder(subMenuBorder);
 		this.add(colorsPanel);
 
 	}
-	public void paintComponent(Graphics g){
-			super.paintComponent(g);
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 
+	public JButton createShapeButton(String asset_name) {
+		JButton tmp = new JButton();
+
+		try {
+			tmp.setName(asset_name);
+			tmp.setIcon(new ImageIcon((Image) this.m.getResource(asset_name)));
+		} catch (Exception e) {
+			System.out.println("Error: " + asset_name + ": " + e.getStackTrace().toString());
+		}
+		return (tmp);
+	}
 
 	public JPanel createShapesPanel() {
 		JPanel shapesPanel = new JPanel();
-
-		shapesPanel.add(createSubMenuLabel("Shapes"));
-
 		JButton[] shapeButtons = new JButton[4];
 
-		shapeButtons[0] = new JButton();
-		shapeButtons[0].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/polygon_icon.png"))));
-		shapeButtons[1] = new JButton();
-		shapeButtons[1].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/rectangle_icon.png"))));
-		shapeButtons[2] = new JButton();
-		shapeButtons[2].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/triangle_icon.png"))));
-		shapeButtons[3] = new JButton();
-		shapeButtons[3].setIcon(new ImageIcon(Objects.requireNonNull(this.getClass().getResource("../resources/circle_icon.png"))));
+		shapesPanel.add(createSubMenuLabel("Shapes"));
+		shapeButtons[0] = createShapeButton("polygon_icon");
+		shapeButtons[1] = createShapeButton("rectangle_icon");
+		shapeButtons[2] = createShapeButton("triangle_icon");
+		shapeButtons[3] = createShapeButton("circle_icon");
 
 		for (JButton btn : shapeButtons) {
 			btn.setBackground(Color.white);
@@ -72,7 +89,7 @@ public class MenuView extends JPanel{
 			shapesPanel.add(btn);
 		}
 
-		return shapesPanel;
+		return (shapesPanel);
 	}
 
 	public JPanel createToolsPanel() {
@@ -110,12 +127,21 @@ public class MenuView extends JPanel{
 		buttonFormat(btn);
 		colorPanel.add(btn);
 
+		JLabel colorLbl = new JLabel("Selected color:", JLabel.LEFT);
+		colorLbl.setPreferredSize(new Dimension(198, 15));
+		colorLbl.setFont(new Font("Helvetica", Font.BOLD, 13));
+		colorPanel.add(colorLbl);
+
+		JPanel draw = new drawRect();
+		draw.setPreferredSize(new Dimension(190, 15));
+		colorPanel.add(draw);
+
 		return colorPanel;
 	}
 
 	public JLabel createSubMenuLabel(String txt) {
 		JLabel lbl = new JLabel(txt, JLabel.CENTER);
-		lbl.setPreferredSize(new Dimension(198, 20));
+		lbl.setPreferredSize(new Dimension(190, 20));
 		lbl.setFont(new Font("Helvetica", Font.BOLD, 15));
 
 		return lbl;
@@ -127,5 +153,18 @@ public class MenuView extends JPanel{
 		btn.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		btn.setBorder(new EtchedBorder());
 		btn.addActionListener(mc);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
+	}
+
+	public class drawRect extends JPanel {
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.setColor(mc.getSelectedColor());
+			g.fillRect(0, 0, 70, 50);
+		}
 	}
 }

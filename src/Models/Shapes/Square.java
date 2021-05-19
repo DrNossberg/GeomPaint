@@ -1,21 +1,22 @@
-package Models;
+package Models.Shapes;
+
+import Models.Mediator;
+import Models.ShapeGeom;
 
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import java.lang.Math;
 
 public class Square extends ShapeGeom {
     protected final Rectangle rect;
 
-    public Square(ArrayList<Point> points) {
-        this(points.get(0), points.get(1));
-    }
-
-    public Square(Point a, Point b) {
-        super(new ArrayList<Point>());
+    public Square(Mediator m, List<Point> points) {
+        // this(m, points.get(0), points.get(1));
+        super(m, new ArrayList<Point>());
+        Point a = points.get(0);
+        Point b = (points.size() > 1) ? points.get(1) : a;
         Point topLeft  = new Point( (int) Math.min(a.getX(), b.getX()),
                                     (int) Math.min(a.getY(), b.getY()));
         Point downRight = new Point((int) Math.max(a.getX(), b.getX()),
@@ -35,12 +36,23 @@ public class Square extends ShapeGeom {
         Point topLeft = super.pointMemo.get(0);
         Point downRight = super.pointMemo.get(2);
 
+        if (super.selectedMemo == 0) {
+            if (topLeft.y >= downRight.y)
+                topLeft.y = downRight.y - 1;
+            if (topLeft.x >= downRight.x)
+                topLeft.x = downRight.x - 1;
+        }
+        if (super.selectedMemo == 1) {
+            if (downRight.y <= topLeft.y)
+                downRight.y = topLeft.y + 1;
+            if (downRight.x <= topLeft.x)
+                downRight.x = topLeft.x + 1;
+        }
         this.rect.setBounds(topLeft.x, topLeft.y,
                 downRight.x - topLeft.x,
                 downRight.y - topLeft.y);
-        // System.out.println("tp y : " + topLeft.y + " dR y: " + downRight.y);
-        // System.out.println(this.rect.getBounds());
     }
+
     // public void fill(Color c){}
 
     @Override
@@ -48,6 +60,12 @@ public class Square extends ShapeGeom {
         g.setColor(this.borderColor);
         g.drawRect((int) this.rect.getX(), (int) this.rect.getY(),
             (int) this.rect.getWidth(), (int) this.rect.getHeight());
+
+        if (this.color != null) {
+            g.setColor(this.color);
+            g.fillRect((int) this.rect.getX() + 1, (int) this.rect.getY() + 1,
+                    (int) this.rect.getWidth() - 1, (int) this.rect.getHeight() - 1);
+        }
     }
 
     public boolean intersects(Rectangle r) {

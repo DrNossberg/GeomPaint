@@ -7,14 +7,19 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import Controllers.CanvasController;
+import Controllers.MenuController;
 
 @SuppressWarnings("deprecation")
 public class CanvasView extends JPanel implements Observer {
     CanvasController cc;
+    MenuController mc;
 
-    public CanvasView(CanvasController cc) {
+    public CanvasView(CanvasController cc, MenuController mc) {
         this.cc = cc;
+        this.mc = mc;
         this.addMouseListener(cc);
+        mc.addObserver(this);
+        this.cc.getMediator().addObserver(this);
     }
 
     @Override
