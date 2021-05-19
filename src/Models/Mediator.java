@@ -8,6 +8,7 @@ import Models.Shapes.Triangle;
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Observable;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -96,8 +97,9 @@ public class Mediator extends Observable {
             this.selectedShape.drawMemo(g);
             this.selectedShape.draw(g);
         }
-        for (ShapeGeom shape : this.shapes)
-            shape.draw(g);
+
+        for (int i = this.shapes.size()-1; i >= 0; i--)
+            shapes.get(i).draw(g);
     }
 
     public Object getResource(String resource) {
