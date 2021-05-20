@@ -31,7 +31,7 @@ import Models.Mediator;
 
 @SuppressWarnings("deprecation")
 public abstract class ShapeGeom extends Polygon {
-    private Mediator m;
+    public Mediator m;
     protected Color borderColor = Color.black;
     protected Color color;
     protected int thickness;

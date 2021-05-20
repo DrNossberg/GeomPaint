@@ -15,6 +15,8 @@ public class Mediator extends Observable {
     private final ArrayList<ShapeGeom> shapes;
     private ShapeGeom selectedShape;
     private AssetLoader loader;
+    private Image image = null;
+    private Point imageCoord = null;
 
     public Mediator(AssetLoader loader) {
         this.loader = loader;
@@ -30,8 +32,9 @@ public class Mediator extends Observable {
     public void createShape(ShapeType shapetype, List<Point> points, Color color) {
         ShapeGeom shape = switch (shapetype) {
             case NONE       -> null;
-            case POLYGONE   -> new Polygon(this, points, color);
+            case POLYGON   -> new Polygon(this, points, color);
             case RECTANGLE  -> new Square(this, points, color);
+            case SQUARE     -> new Square(this, points, color, true);
             case TRIANGLE   -> new Polygon(this, points, color);
             case CIRCLE     -> new Circle(this, points, color);
         };
@@ -125,6 +128,9 @@ public class Mediator extends Observable {
     }
 
     public void draw(Graphics g) {
+        if (image != null && this.imageCoord != null)
+            g.drawImage(this.image, (int) this.imageCoord.getX() + 10,
+                (int) this.imageCoord.getY() + 10, null);
         for (int i = this.shapes.size()-1; i >= 0; i--)
             shapes.get(i).draw(g);
 
@@ -136,5 +142,13 @@ public class Mediator extends Observable {
 
     public Object getResource(String resource) {
         return (this.loader.get(resource));
+    }
+
+    public void setImage(Image i) {
+        this.image = i;
+    }
+
+    public void setImageCoord(Point coord) {
+        this.imageCoord = coord;
     }
 }
