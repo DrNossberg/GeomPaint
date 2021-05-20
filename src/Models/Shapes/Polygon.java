@@ -15,9 +15,9 @@ public class Polygon extends ShapeGeom {
         this.showedMemo = new ArrayList<>();
         for (Point p: points)
             this.showedMemo.add(true);
-        this.showedMemo.set(this.showedMemo.size() - 1, false);
         super.xpoints = new int[this.pointMemo.size()];
         super.ypoints = new int[this.pointMemo.size()];
+        updateShape();
     }
 
     @Override
@@ -35,8 +35,6 @@ public class Polygon extends ShapeGeom {
         g.drawPolygon(super.xpoints, super.ypoints, this.pointMemo.size());
 
         if (this.color != null) {
-            g.setColor(this.color);
-
             int[] xpointsInt = new int[super.xpoints.length];
             int[] ypointsInt = new int[super.ypoints.length];
 
@@ -44,7 +42,7 @@ public class Polygon extends ShapeGeom {
                 xpointsInt[i] = super.xpoints[i] + 1;
                 ypointsInt[i] = super.ypoints[i] + 1;
             }
-
+            g.setColor(this.color);
             g.fillPolygon(xpointsInt, ypointsInt, this.pointMemo.size());
         }
 
@@ -52,7 +50,6 @@ public class Polygon extends ShapeGeom {
 
     @Override
     public boolean intersects(Rectangle r) {
-        System.out.println(super.getBounds());
         return (super.intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight()));
     }
 }
