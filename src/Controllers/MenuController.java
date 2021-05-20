@@ -30,7 +30,7 @@ public class MenuController extends Observable implements ActionListener {
             }
 
             // Shapes buttons
-            case "polygon_icon"     -> cc.initiateShape(ShapeType.POLYGONE, this.selectedColor);
+            case "polygon_icon"     -> cc.initiateShape(ShapeType.POLYGON, this.selectedColor);
             case "rectangle_icon"   -> cc.initiateShape(ShapeType.RECTANGLE, this.selectedColor);
             case "triangle_icon"    -> cc.initiateShape(ShapeType.TRIANGLE, this.selectedColor);
             case "circle_icon"      -> cc.initiateShape(ShapeType.CIRCLE, this.selectedColor);

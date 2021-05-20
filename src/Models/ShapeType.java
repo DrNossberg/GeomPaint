@@ -17,9 +17,10 @@ package Models;
 public enum ShapeType {
     NONE(0),
     RECTANGLE(2),
+    SQUARE(2),
     TRIANGLE(3),
     CIRCLE(2),
-    POLYGONE(-1);
+    POLYGON(-1);
 
     private int memoPoint;
 

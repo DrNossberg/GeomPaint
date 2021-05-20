@@ -15,8 +15,11 @@
 package Controllers;
 
 import javax.swing.*;
+import java.awt.Image;
 import java.awt.Color;
 import java.awt.Point;
+
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
@@ -47,6 +50,8 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         if (!this.finished) {
             ArrayList<Point> tmp = new ArrayList<>(points);
             tmp.add(e.getPoint());
+            if (e.isShiftDown() && this.shapeType == ShapeType.RECTANGLE)
+                this.shapeType = ShapeType.SQUARE;
             m.createShape(this.shapeType, tmp, this.color);
         }
         if (this.curr != null) {
@@ -54,6 +59,8 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
             this.m.getSelectedShape().updateShape();
             this.m.update();
         }
+        if (this.shapeType != ShapeType.NONE)
+            this.m.setImageCoord(e.getPoint());
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -86,15 +93,18 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         if (!this.finished)
             this.points.add(new Point(e.getX(), e.getY()));
         if (this.shapeType != this.shapeType.NONE && figureDone(e)) {
+            if (e.isShiftDown() && this.shapeType == ShapeType.RECTANGLE)
+                this.shapeType = ShapeType.SQUARE;
             this.m.addShape(this.shapeType, points, this.color);
             this.shapeType = ShapeType.NONE;
             this.finished = true;
             this.points.clear();
+            this.m.setImage(null);
         }
     }
 
     public boolean figureDone(MouseEvent e) {
-        if (this.shapeType == ShapeType.POLYGONE) {
+        if (this.shapeType == ShapeType.POLYGON) {
             int margin = 5;
             boolean ret = this.points.size() > 1 &&
                     e.getX() >= (this.points.get(0).getX() - margin)  &&
@@ -107,7 +117,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         }
         return (this.points.size() == this.shapeType.getMaxMemoPoint());
     }
-
+// 
     public Mediator getMediator() {
         return (this.m);
     }
@@ -117,7 +127,11 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         this.points.clear();
         this.finished = false;
         this.color = c;
+        try {
+            m.setImage((Image) m.getResource(type.toString().toLowerCase() + "_icon"));
+            System.out.println(type.toString().toLowerCase() + "_icon");
+        } catch (Exception e) {
+            System.out.println("error" + "memoPoint");
+        }
     }
-
-
 }

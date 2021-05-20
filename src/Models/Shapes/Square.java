@@ -11,8 +11,13 @@ import java.lang.Math;
 
 public class Square extends ShapeGeom {
     protected final Rectangle rect;
+    private boolean square = true;
 
     public Square(Mediator m, List<Point> points, Color c) {
+        this(m, points, c, false);
+    }
+
+    public Square(Mediator m, List<Point> points, Color c, boolean square) {
         super(m, new ArrayList<Point>(), c);
         Point a = points.get(0);
         Point b = (points.size() > 1) ? points.get(1) : a;
@@ -24,6 +29,7 @@ public class Square extends ShapeGeom {
         super.pointMemo.add(new Point(downRight.x, topLeft.y));
         super.pointMemo.add(downRight);
         super.pointMemo.add(new Point(topLeft.x, downRight.y));
+        this.square = square;
 
         this.showedMemo = Arrays.asList(true, false, true, false);
         this.rect = new Rectangle(0, 0, -1, -1); // new Rectangle(points) ?
@@ -47,6 +53,10 @@ public class Square extends ShapeGeom {
             if (downRight.x <= topLeft.x)
                 downRight.x = topLeft.x + 1;
         }
+
+        if (this.square)
+            if (super.selectedMemo == 1 || this.selectedMemo == -1)
+                downRight.x = topLeft.x + (downRight.y - topLeft.y);
         this.rect.setBounds(topLeft.x, topLeft.y,
                 downRight.x - topLeft.x,
                 downRight.y - topLeft.y);
