@@ -14,8 +14,8 @@ import java.util.List;
 public class Circle extends ShapeGeom {
     private Ellipse2D.Double ellipse;
 
-    public Circle(Mediator m, List<Point> points) {
-        super(m, new ArrayList<Point>());
+    public Circle(Mediator m, List<Point> points, Color c) {
+        super(m, new ArrayList<>(), c);
         Point a = points.get(0);
         Point b = (points.size() > 1) ? points.get(1) : a;
 
