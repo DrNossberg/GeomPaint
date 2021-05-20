@@ -22,6 +22,7 @@ public class Polygon extends ShapeGeom {
 
     @Override
     public void updateShape() {
+        super.reset();
         for (int i = 0; i < this.pointMemo.size(); i++) {
             super.xpoints[i] = (int) this.pointMemo.get(i).getX();
             super.ypoints[i] = (int) this.pointMemo.get(i).getY();
@@ -41,6 +42,7 @@ public class Polygon extends ShapeGeom {
             for (int i = 0; i < super.xpoints.length; i++) {
                 xpointsInt[i] = super.xpoints[i] + 1;
                 ypointsInt[i] = super.ypoints[i] + 1;
+                super.addPoint(xpoints[i], ypoints[i]);
             }
             g.setColor(this.color);
             g.fillPolygon(xpointsInt, ypointsInt, this.pointMemo.size());

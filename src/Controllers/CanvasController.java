@@ -59,13 +59,13 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     }
 
     public void mouseDragged(MouseEvent e) {
-        if (prev_pos != null && finished && this.m.shapeIntersect(e)) {
+        if (this.prev_pos != null && this.curr == null && finished && this.m.shapeIntersect(e)) {
             this.m.translate(e.getX() - (int) prev_pos.getX(),
                 e.getY() - (int) prev_pos.getY());
             this.m.getSelectedShape().updateShape();
             this.m.update();
         }
-        prev_pos = e.getPoint();
+        this.prev_pos = e.getPoint();
     }
 
     public void mousePressed(MouseEvent e) {
