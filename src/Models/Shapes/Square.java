@@ -12,8 +12,8 @@ import java.lang.Math;
 public class Square extends ShapeGeom {
     protected final Rectangle rect;
 
-    public Square(Mediator m, List<Point> points) {
-        super(m, new ArrayList<Point>());
+    public Square(Mediator m, List<Point> points, Color c) {
+        super(m, new ArrayList<Point>(), c);
         Point a = points.get(0);
         Point b = (points.size() > 1) ? points.get(1) : a;
         Point topLeft  = new Point( (int) Math.min(a.getX(), b.getX()),

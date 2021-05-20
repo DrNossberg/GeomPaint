@@ -42,7 +42,7 @@ public abstract class ShapeGeom extends Polygon {
     protected int maxMemoPoint;
     protected int selectedMemo;
 
-    public ShapeGeom(Mediator m, List<Point> points) {
+    public ShapeGeom(Mediator m, List<Point> points, Color c) {
         this.m = m;
         this.pointMemo = new ArrayList<Point>(points);
         this.displayMemo = false;

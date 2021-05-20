@@ -15,6 +15,7 @@
 package Controllers;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
@@ -35,6 +36,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
     private boolean finished = true;
     private Point curr = null;
     private Point prev_pos = null;
+    private Color color;
 
     public CanvasController(Mediator m) {
         super();
@@ -84,7 +86,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         if (!this.finished)
             this.points.add(new Point(e.getX(), e.getY()));
         if (this.shapeType != this.shapeType.NONE && figureDone(e)) {
-            this.m.addShape(this.shapeType, points);
+            this.m.addShape(this.shapeType, points, this.color);
             this.shapeType = ShapeType.NONE;
             this.finished = true;
             this.points.clear();
@@ -114,6 +116,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         this.shapeType = type;
         this.points.clear();
         this.finished = false;
+        this.color = c;
     }
 
 
