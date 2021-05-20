@@ -12,6 +12,7 @@ import java.util.Observable;
 public class MenuController extends Observable implements ActionListener {
     private CanvasController cc;
     Color selectedColor = Color.BLACK;
+   
 
     public MenuController(CanvasController cc) {
         this.cc = cc;
@@ -29,16 +30,23 @@ public class MenuController extends Observable implements ActionListener {
             }
 
             // Shapes buttons
-            case "polygon_icon"     -> cc.initiateShape(ShapeType.POLYGONE);
-            case "rectangle_icon"   -> cc.initiateShape(ShapeType.RECTANGLE);
-            case "triangle_icon"    -> cc.initiateShape(ShapeType.TRIANGLE);
-            case "circle_icon"      -> cc.initiateShape(ShapeType.CIRCLE);
+            case "polygon_icon"     -> cc.initiateShape(ShapeType.POLYGONE, this.selectedColor);
+            case "rectangle_icon"   -> cc.initiateShape(ShapeType.RECTANGLE, this.selectedColor);
+            case "triangle_icon"    -> cc.initiateShape(ShapeType.TRIANGLE, this.selectedColor);
+            case "circle_icon"      -> cc.initiateShape(ShapeType.CIRCLE, this.selectedColor);
 
             // Edit buttons
             case "fill_shape" ->{
             	if (this.selectedColor != null && this.cc.getMediator().getSelectedShape() != null) {
             	    this.cc.getMediator().getSelectedShape().setColor(this.selectedColor);
             	    update();
+                }
+            }
+
+            case "fill_border" ->{
+                if (this.selectedColor != null && this.cc.getMediator().getSelectedShape() != null) {
+                    this.cc.getMediator().getSelectedShape().setBorderColor(this.selectedColor);
+                    update();
                 }
             }
             case "erase_shape"      -> this.cc.getMediator().removeShape();

@@ -27,7 +27,7 @@ public class Mediator extends Observable {
         notifyObservers();
     }
 
-    public void createShape(ShapeType shapetype, List<Point> points) {
+    public void createShape(ShapeType shapetype, List<Point> points, Color color) {
         ShapeGeom shape = switch (shapetype) {
             case NONE       -> null;
             case POLYGONE   -> new Polygon(this, points, color);
@@ -40,8 +40,8 @@ public class Mediator extends Observable {
     }
 
 
-    public void addShape(ShapeType shapetype, List<Point> points) {
-        createShape(shapetype, points);
+    public void addShape(ShapeType shapetype, List<Point> points, Color c) {
+        createShape(shapetype, points, c);
         if (this.selectedShape != null)
             addShape(this.selectedShape);
         update();
