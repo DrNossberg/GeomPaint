@@ -12,9 +12,8 @@ import java.lang.Math;
 public class Square extends ShapeGeom {
     protected final Rectangle rect;
 
-    public Square(Mediator m, List<Point> points) {
-        // this(m, points.get(0), points.get(1));
-        super(m, new ArrayList<Point>());
+    public Square(Mediator m, List<Point> points, Color c) {
+        super(m, new ArrayList<Point>(), c);
         Point a = points.get(0);
         Point b = (points.size() > 1) ? points.get(1) : a;
         Point topLeft  = new Point( (int) Math.min(a.getX(), b.getX()),
@@ -53,8 +52,6 @@ public class Square extends ShapeGeom {
                 downRight.y - topLeft.y);
     }
 
-    // public void fill(Color c){}
-
     @Override
     public void draw(Graphics g) {
         g.setColor(this.borderColor);
@@ -69,8 +66,7 @@ public class Square extends ShapeGeom {
     }
 
     public boolean intersects(Rectangle r) {
-        //possibility to overload contain here
-        return (this.rect.intersects(r) && !this.rect.contains(r));
+        return (this.rect.intersects(r));
     }
 
     public String toString() {
