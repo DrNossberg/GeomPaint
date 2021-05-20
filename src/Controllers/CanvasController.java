@@ -47,7 +47,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         if (!this.finished) {
             ArrayList<Point> tmp = new ArrayList<>(points);
             tmp.add(e.getPoint());
-            m.createShape(this.shapeType, tmp);
+            m.createShape(this.shapeType, tmp, this.color);
         }
         if (this.curr != null) {
             this.curr.setLocation(e.getPoint());
@@ -112,7 +112,7 @@ public class CanvasController extends MouseAdapter implements MouseListener, Mou
         return (this.m);
     }
 
-    public void initiateShape(ShapeType type) {
+    public void initiateShape(ShapeType type, Color c) {
         this.shapeType = type;
         this.points.clear();
         this.finished = false;

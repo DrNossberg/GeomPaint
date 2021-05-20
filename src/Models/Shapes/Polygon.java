@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Polygon extends ShapeGeom {
 
-    public Polygon(Mediator m, List<Point> points) {
-        super(m, points);
+    public Polygon(Mediator m, List<Point> points, Color c) {
+        super(m, points, c);
         this.showedMemo = new ArrayList<>();
         for (Point p: points)
             this.showedMemo.add(true);
