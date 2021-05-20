@@ -32,7 +32,7 @@ public class GeomPain {
         // Add view observer to the model
         mediator.addObserver(cv);
 
-        JFrame frame = new JFrame("Our super rectangle!");
+        JFrame frame = new JFrame("GeomPain");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 

@@ -34,7 +34,7 @@ public class MenuView extends JPanel implements Observer {
 
 		Border subMenuBorder = BorderFactory.createLineBorder(new Color(157, 157, 157));
 
-		JLabel title = new JLabel("ToolBox", JLabel.CENTER);
+		JLabel title = new JLabel("GeomPain", JLabel.CENTER);
 		title.setPreferredSize(new Dimension(198, 30));
 		title.setFont(new Font("Helvetica", Font.BOLD, 25));
 		this.add(title);
