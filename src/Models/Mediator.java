@@ -1,16 +1,14 @@
 package Models;
 
-import Models.Shapes.Circle;
-import Models.Shapes.Polygon;
-import Models.Shapes.Square;
-import Models.Shapes.Triangle;
-
 import java.awt.*;
 import java.util.*;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import Models.Shapes.Circle;
+import Models.Shapes.Polygon;
+import Models.Shapes.Square;
 
 @SuppressWarnings("deprecation")
 public class Mediator extends Observable {
@@ -29,7 +27,7 @@ public class Mediator extends Observable {
         notifyObservers();
     }
 
-    public void createShape(ShapeType shapetype, List<Point> points, Color color) {
+    public void createShape(ShapeType shapetype, List<Point> points) {
         ShapeGeom shape = switch (shapetype) {
             case NONE       -> null;
             case POLYGONE   -> new Polygon(this, points, color);
@@ -95,7 +93,7 @@ public class Mediator extends Observable {
 
 
     public boolean shapeIntersect(MouseEvent e) {
-        Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 30, 30);
+        Rectangle click = new Rectangle(e.getX() - 10, e.getY() - 10, 10, 10);
 
         for (ShapeGeom shape : this.shapes) {
             if (shape.intersects(click)) {
